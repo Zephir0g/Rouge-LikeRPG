@@ -13,4 +13,24 @@ public class StaticEntity extends BasicEntity {
     public void draw(Graphics g) {
         // TODO Реализация отрисовки объектов
     }
+
+    @Override
+    public void setX(int x) {
+        super.setX(x);
+    }
+
+    @Override
+    public void setY(int y) {
+        super.setY(y);
+    }
+
+    @Override
+    public void setWidth(int width) {
+        super.setWidth(width);
+    }
+
+    @Override
+    public void setHeight(int height) {
+        super.setHeight(height);
+    }
 }

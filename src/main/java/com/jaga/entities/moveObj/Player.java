@@ -1,14 +1,16 @@
 package com.jaga.entities.moveObj;
 
+import com.jaga.config.ConfigCore;
 import com.jaga.core.Game;
+import com.jaga.entities.staticObj.Wall;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.List;
 import java.util.logging.Level;
 
 public class Player extends MovableEntity implements KeyListener {
@@ -18,6 +20,13 @@ public class Player extends MovableEntity implements KeyListener {
         super(x, y, width, height);
         getTexture();
         Game.log.log(Level.INFO,"Player created");
+    }
+
+    @Override
+    public void move(int dx, int dy) {
+        checkCollisionWithWalls(dx, dy);
+            x += dx;
+            y += dy;
     }
 
     @Override
@@ -35,20 +44,43 @@ public class Player extends MovableEntity implements KeyListener {
         }
     }
 
+    public boolean checkCollisionWithWalls(int dx, int dy) {
+        List<Wall> walls = ConfigCore.walls;
+        Rectangle playerRect = new Rectangle(x + dx, y + dy, width, height);
+
+        for (Wall wall : walls) {
+            Rectangle wallRect = new Rectangle(wall.getX(), wall.getY(), wall.getWidth(), wall.getHeight());
+
+            if (playerRect.intersects(wallRect)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
-        int dx = 0, dy = 0; // Смещение игрока по осям X и Y
+        int dx = 0, dy = 0;
 
-        // Обработка нажатия клавиши управления игроком
+
         // TODO  Create config file for controls
         switch (keyCode){
-            case KeyEvent.VK_W -> dy = -10; // up
-            case KeyEvent.VK_S -> dy = 10; // down
-            case KeyEvent.VK_A -> dx = -10; // left
-            case KeyEvent.VK_D -> dx = 10; // right
+            case KeyEvent.VK_W -> dy = -50; // up
+            case KeyEvent.VK_S -> dy = 50; // down
+            case KeyEvent.VK_A -> dx = -50; // left
+            case KeyEvent.VK_D -> dx = 50; // right
         }
+
+
+        if (checkCollisionWithWalls(dx, dy)) {
+            dx = 0;
+            dy = 0;
+        }
+
         move(dx, dy);
     }
 
