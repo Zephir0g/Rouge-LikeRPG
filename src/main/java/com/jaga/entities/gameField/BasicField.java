@@ -1,20 +1,25 @@
 package com.jaga.entities.gameField;
 
 import com.jaga.config.ConfigEntity;
-import com.jaga.core.Game;
 import com.jaga.entities.staticObj.Wall;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BasicField {
 
+    private static final Logger log = Logger.getLogger(BasicField.class.getName());
+
     public BasicField() {
-        Game.log.log(Level.INFO, "Field Created");
+        log.log(Level.INFO, "Field Created");
     }
+
+    // red color of this log
+    //INFO: Field Created
+    //TODO fix Field Created log
+
 
     public List<Wall> creatGameFieldWalls(int screenWidth, int screenHeight) {
 

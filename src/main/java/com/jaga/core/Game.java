@@ -2,6 +2,7 @@ package com.jaga.core;
 
 import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
+import com.jaga.config.ConfigLogger;
 import com.jaga.entities.gameField.BasicField;
 import com.jaga.entities.moveObj.Player;
 import com.jaga.entities.render.EntityRenderer;
@@ -11,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +24,7 @@ public class Game {
     int height;
 
     public Game() {
+        ConfigLogger.LoggerColor();
         log.log(Level.INFO, "Start create window");
         JFrame frame = new JFrame("Rouge-like Game");
         EntityRenderer renderer = new EntityRenderer();
