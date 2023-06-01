@@ -25,6 +25,7 @@ public class FPSMeter extends StaticEntity{
     }
 
     public void draw(Graphics g) {
+        g.setColor(Color.RED);
         g.drawString("FPS: " + String.format("%.2f", fps), x, y);
     }
 
