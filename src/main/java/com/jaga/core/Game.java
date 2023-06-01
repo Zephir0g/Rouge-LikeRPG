@@ -27,13 +27,17 @@ public class Game {
     private GraphicsDevice device;
     private Timer updateTimer;
     private FPSMeter fps;
-    public static boolean isPaused = false;
+    private static boolean isPaused = false;
+    private static boolean isDevProfile = false;
+   // private Terminal terminal = new Terminal();
 
     int width;
     int height;
 
     public Game() {
-        ConfigLogger.LoggerColor();
+        log.addHandler(ConfigLogger.LoggerColor());
+
+        log.setUseParentHandlers(false);
         initGraphics();
 
 
@@ -80,6 +84,7 @@ public class Game {
         frame.addKeyListener(new KeyListener() {
             @Override
             public void keyPressed(KeyEvent e) {
+
                 if (e.getKeyCode() == KeyEvent.VK_F11) {
                     if (isFullscreen) {
                         frame.dispose();
@@ -93,14 +98,23 @@ public class Game {
                         frame.setVisible(true);
                         isFullscreen = true;
                     }
-                }
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     // Thread safe to pause game
                     if (SwingUtilities.isEventDispatchThread()) {
                         togglePause();
                     } else {
                         SwingUtilities.invokeLater(() -> togglePause());
                     }
+                }
+                if (e.isControlDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_D) {
+                    if(isDevProfile) {
+                        isDevProfile = false;
+                        log.log(Level.INFO, "Stop dev profile");
+                    } else {
+                        isDevProfile = true;
+                        log.log(Level.INFO, "Start dev profile");
+                    }
+                    // Здесь можно выполнить дополнительные действия, связанные с выбором профиля "Dev"
                 }
             }
 
@@ -142,4 +156,11 @@ public class Game {
         frame.addKeyListener(player);
     }
 
+    public static boolean isPaused() {
+        return isPaused;
+    }
+
+    public static void setIsPaused(boolean isPaused) {
+        Game.isPaused = isPaused;
+    }
 }
