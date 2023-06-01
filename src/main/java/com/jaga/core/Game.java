@@ -3,15 +3,14 @@ package com.jaga.core;
 import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
 import com.jaga.entities.gameField.BasicField;
-import com.jaga.entities.moveObj.Player;
+import com.jaga.entities.movableObjects.Player;
 import com.jaga.entities.render.EntityRenderer;
-import com.jaga.entities.staticObj.Wall;
+import com.jaga.entities.staticObjects.Wall;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

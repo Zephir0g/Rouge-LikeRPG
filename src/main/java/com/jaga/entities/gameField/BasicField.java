@@ -2,10 +2,8 @@ package com.jaga.entities.gameField;
 
 import com.jaga.config.ConfigEntity;
 import com.jaga.core.Game;
-import com.jaga.entities.staticObj.Wall;
+import com.jaga.entities.staticObjects.Wall;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;

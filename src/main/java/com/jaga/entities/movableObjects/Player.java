@@ -1,8 +1,8 @@
-package com.jaga.entities.moveObj;
+package com.jaga.entities.movableObjects;
 
 import com.jaga.config.ConfigCore;
 import com.jaga.core.Game;
-import com.jaga.entities.staticObj.Wall;
+import com.jaga.entities.staticObjects.Wall;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

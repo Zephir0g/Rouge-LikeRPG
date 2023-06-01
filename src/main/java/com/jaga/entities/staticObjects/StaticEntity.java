@@ -1,4 +1,4 @@
-package com.jaga.entities.staticObj;
+package com.jaga.entities.staticObjects;
 
 import com.jaga.entities.BasicEntity;
 

@@ -1,4 +1,4 @@
-package com.jaga.entities.moveObj;
+package com.jaga.entities.movableObjects;
 
 import com.jaga.entities.BasicEntity;
 
