@@ -134,7 +134,7 @@ public class Player extends MovableEntity implements KeyListener {
             dx = 0;
             dy = 0;
         }
-        if (!Game.isPaused) {
+        if (!Game.isPaused()) {
             move(dx, dy);
         }
     }
