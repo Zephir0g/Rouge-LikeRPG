@@ -1,4 +1,4 @@
-package com.jaga.entities.staticObjects;
+package com.jaga.core.entities.staticObjects;
 
 import com.jaga.core.Game;
 

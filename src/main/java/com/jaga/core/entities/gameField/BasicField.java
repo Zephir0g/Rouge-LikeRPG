@@ -1,8 +1,8 @@
-package com.jaga.entities.gameField;
+package com.jaga.core.entities.gameField;
 
 import com.jaga.config.ConfigEntity;
 import com.jaga.core.Game;
-import com.jaga.entities.staticObjects.Wall;
+import com.jaga.core.entities.staticObjects.Wall;
 
 import java.util.ArrayList;
 import java.util.List;

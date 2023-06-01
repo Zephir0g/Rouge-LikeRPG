@@ -1,4 +1,4 @@
-package com.jaga.entities;
+package com.jaga.core.entities;
 
 import java.awt.*;
 

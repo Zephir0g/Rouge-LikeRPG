@@ -1,6 +1,6 @@
-package com.jaga.entities.movableObjects;
+package com.jaga.core.entities.movableObjects;
 
-import com.jaga.entities.BasicEntity;
+import com.jaga.core.entities.BasicEntity;
 
 import java.awt.*;
 

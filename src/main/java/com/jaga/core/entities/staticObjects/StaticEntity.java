@@ -1,6 +1,6 @@
-package com.jaga.entities.staticObjects;
+package com.jaga.core.entities.staticObjects;
 
-import com.jaga.entities.BasicEntity;
+import com.jaga.core.entities.BasicEntity;
 
 import java.awt.*;
 

@@ -1,6 +1,6 @@
 package com.jaga.config;
 
-import com.jaga.entities.staticObjects.Wall;
+import com.jaga.core.entities.staticObjects.Wall;
 
 import java.util.List;
 
