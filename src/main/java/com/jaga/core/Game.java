@@ -2,13 +2,12 @@ package com.jaga.core;
 
 import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
+import com.jaga.config.ConfigLogger;
 import com.jaga.core.entities.gameField.BasicField;
 import com.jaga.core.entities.movableObjects.Player;
 import com.jaga.core.entities.render.EntityRenderer;
+import com.jaga.core.entities.staticObjects.FPSMeter;
 import com.jaga.core.entities.staticObjects.Wall;
-import com.jaga.config.ConfigLogger;
-
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,14 +21,41 @@ public class Game {
     public static Logger log = Logger.getLogger(Game.class.getName());
 
     private static boolean isFullscreen = true;
+
+    private JFrame frame;
+    private EntityRenderer renderer;
+    private GraphicsDevice device;
+
+    private Timer updateTimer;
+
+    private FPSMeter fps;
     int width;
     int height;
 
     public Game() {
         ConfigLogger.LoggerColor();
+        initGraphics();
+
+
+        updateTimer = new Timer(1, e -> {
+            fps.update();
+            renderer.repaint();
+        });
+
+        initEntities();
+        addKeyListener();
+
+        frame.setVisible(true);
+        log.log(Level.INFO, "Start game");
+
+        updateTimer.start();
+    }
+
+    private void initGraphics() {
         log.log(Level.INFO, "Start create window");
-        JFrame frame = new JFrame("Rouge-like Game");
-        EntityRenderer renderer = new EntityRenderer();
+
+        frame = new JFrame("Rouge-like Game");
+        renderer = new EntityRenderer();
         frame.add(renderer);
 
         //Get the screen size
@@ -37,49 +63,20 @@ public class Game {
         width = screenSize.width;
         height = screenSize.height;
 
-        System.out.println();
-
         frame.setSize(width, height);
         frame.setResizable(false);
 
         //Fullscreen
-        // Получаем экземпляр GraphicsDevice, отвечающий за отображение приложения
-        GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        // Get the GraphicsDevice instance responsible for displaying the application
+        device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Устанавливаем полноэкранный режим
-        frame.setUndecorated(false); // Убираем рамки окна
-        device.setFullScreenWindow(frame); // Устанавливаем окно в полноэкранный режим
 
+        frame.setUndecorated(false); // Removing the window frame
+        device.setFullScreenWindow(frame); // Set full screen mode
+    }
 
-        Player player = new Player(width / 2 - 60, height / 2 - 60, ConfigEntity.playerWidth, ConfigEntity.playerHeight);
-
-        //renderer.addEntity(wall);
-        BasicField basicField = new BasicField();
-        ConfigCore.walls = basicField.creatGameFieldWalls(width, height);
-        for (Wall wall : ConfigCore.walls) {
-            renderer.addEntity(wall);
-        }
-        renderer.addEntity(player);
-
-        frame.addKeyListener(player);
-
-        Thread gameThread = new Thread(() -> {
-            while (true) {
-                // Обновление состояния игры
-                SwingUtilities.invokeLater(() -> {
-                    renderer.repaint(); // Перерисовка экрана
-                });
-
-                try {
-                    Thread.sleep(16); // Задержка для обновления окна
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
+    private void addKeyListener() {
         frame.addKeyListener(new KeyListener() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -112,11 +109,22 @@ public class Game {
                 // Не используется
             }
         });
-
-        frame.setVisible(true);
-        log.log(Level.INFO, "Start game");
-        gameThread.start();
     }
 
+    private void initEntities() {
+        Player player = new Player(width / 2 - 60, height / 2 - 60, ConfigEntity.playerWidth, ConfigEntity.playerHeight);
+
+        //renderer.addEntity(wall);
+        BasicField basicField = new BasicField();
+        fps = new FPSMeter(10, 10, 10, 10);
+        ConfigCore.walls = basicField.creatGameFieldWalls(width, height);
+        for (Wall wall : ConfigCore.walls) {
+            renderer.addEntity(wall);
+        }
+        renderer.addEntity(player);
+        renderer.addEntity(fps);
+
+        frame.addKeyListener(player);
+    }
 
 }
