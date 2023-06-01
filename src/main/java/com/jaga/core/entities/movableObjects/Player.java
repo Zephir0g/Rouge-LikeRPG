@@ -1,6 +1,7 @@
 package com.jaga.core.entities.movableObjects;
 
 import com.jaga.config.ConfigCore;
+import com.jaga.config.ConfigEntity;
 import com.jaga.core.Game;
 import com.jaga.core.entities.staticObjects.Wall;
 
@@ -38,7 +39,7 @@ public class Player extends MovableEntity implements KeyListener {
 
     private void getTexture(){
         try{
-            texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/entity/player.png")));
+            texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.defaultPlayerTexture)));
         } catch (IOException e) {
             Game.log.log(Level.WARNING, "Player texture not found");
         }
