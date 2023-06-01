@@ -1,7 +1,5 @@
 package com.jaga.config;
 
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
