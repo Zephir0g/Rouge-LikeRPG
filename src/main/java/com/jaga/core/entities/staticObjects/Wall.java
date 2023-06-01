@@ -1,10 +1,12 @@
 package com.jaga.core.entities.staticObjects;
 
+import com.jaga.config.ConfigEntity;
 import com.jaga.core.Game;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -14,12 +16,17 @@ public class Wall extends StaticEntity{
 
     public Wall(int x, int y, int width, int height) {
         super(x, y, width, height);
-        getTexture();
+        getTexture(ConfigEntity.defaultWallTexture);
     }
 
-    private void getTexture(){
+    public Wall(int x, int y, int width, int height, String texturePath) {
+        super(x, y, width, height);
+        getTexture(texturePath);
+    }
+
+    private void getTexture(String texturePath){
         try{
-            texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/entity/wall.png")));
+            texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
         } catch (IOException e) {
             Game.log.log(Level.WARNING, "Player texture not found");
         }
