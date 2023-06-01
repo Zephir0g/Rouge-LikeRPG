@@ -17,6 +17,11 @@ import java.util.logging.Level;
 public class Player extends MovableEntity implements KeyListener {
     private Image texture;
 
+    private boolean upPressed = false;
+    private boolean downPressed = false;
+    private boolean leftPressed = false;
+    private boolean rightPressed = false;
+
     public Player(int x, int y, int width, int height) {
         super(x, y, width, height);
         getTexture();
@@ -32,8 +37,6 @@ public class Player extends MovableEntity implements KeyListener {
 
     @Override
     public void draw(Graphics g) {
-        // TODO Реализация отрисовки игрока (ассетами)
-
         g.drawImage(texture, x, y, width, height, null);
     }
 
@@ -66,19 +69,66 @@ public class Player extends MovableEntity implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        //TODO Make a normal movement
         int keyCode = e.getKeyCode();
 
-        int dx = 0, dy = 0;
-
-
-        // TODO  Create config file for controls
-        switch (keyCode){
-            case KeyEvent.VK_W -> dy = -50; // up
-            case KeyEvent.VK_S -> dy = 50; // down
-            case KeyEvent.VK_A -> dx = -50; // left
-            case KeyEvent.VK_D -> dx = 50; // right
+        if (keyCode == KeyEvent.VK_W) {
+            upPressed = true;
+        } else if (keyCode == KeyEvent.VK_S) {
+            downPressed = true;
+        } else if (keyCode == KeyEvent.VK_A) {
+            leftPressed = true;
+        } else if (keyCode == KeyEvent.VK_D) {
+            rightPressed = true;
         }
 
+        updateMovement();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+
+        if (keyCode == KeyEvent.VK_W) {
+            upPressed = false;
+        } else if (keyCode == KeyEvent.VK_S) {
+            downPressed = false;
+        } else if (keyCode == KeyEvent.VK_A) {
+            leftPressed = false;
+        } else if (keyCode == KeyEvent.VK_D) {
+            rightPressed = false;
+        }
+
+        updateMovement();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Не используется, оставляем пустым
+    }
+
+    private void updateMovement() {
+        int dx = 0;
+        int dy = 0;
+
+        if (upPressed) {
+            dy -= 10;
+        }
+        if (downPressed) {
+            dy += 10;
+        }
+        if (leftPressed) {
+            dx -= 10;
+        }
+        if (rightPressed) {
+            dx += 10;
+        }
+
+        // Проверяем, нажаты ли две клавиши одновременно для диагонального движения
+        if ((upPressed || downPressed) && (leftPressed || rightPressed)) {
+            dx = (int) (dx * 0.7);
+            dy = (int) (dy * 0.7);
+        }
 
         if (checkCollisionWithWalls(dx, dy)) {
             dx = 0;
@@ -86,16 +136,5 @@ public class Player extends MovableEntity implements KeyListener {
         }
 
         move(dx, dy);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        // Обработка отпускания клавиши управления игроком
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // Не используется, оставляем пустым
     }
 }
