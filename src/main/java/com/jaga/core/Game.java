@@ -25,10 +25,10 @@ public class Game {
     private JFrame frame;
     private EntityRenderer renderer;
     private GraphicsDevice device;
-
     private Timer updateTimer;
-
     private FPSMeter fps;
+    private boolean isPaused = false;
+
     int width;
     int height;
 
@@ -38,8 +38,8 @@ public class Game {
 
 
         updateTimer = new Timer(1, e -> {
-            fps.update();
-            renderer.repaint();
+                fps.update();
+                renderer.repaint();
         });
 
         initEntities();
@@ -95,7 +95,12 @@ public class Game {
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    System.exit(0);
+                    // Thread safe to pause game
+                    if (SwingUtilities.isEventDispatchThread()) {
+                        togglePause();
+                    } else {
+                        SwingUtilities.invokeLater(() -> togglePause());
+                    }
                 }
             }
 
@@ -109,6 +114,18 @@ public class Game {
                 // Не используется
             }
         });
+    }
+
+    private void togglePause() {
+        if (isPaused) {
+            isPaused = false;
+            System.out.println("Unpause");
+            updateTimer.start();
+        } else {
+            isPaused = true;
+            System.out.println("Pause");
+            updateTimer.stop();
+        }
     }
 
     private void initEntities() {
