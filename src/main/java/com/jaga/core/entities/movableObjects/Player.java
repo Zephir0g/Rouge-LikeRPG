@@ -10,8 +10,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 
 public class Player extends MovableEntity implements KeyListener {
@@ -25,14 +25,14 @@ public class Player extends MovableEntity implements KeyListener {
     public Player(int x, int y, int width, int height) {
         super(x, y, width, height);
         getTexture();
-        Game.log.log(Level.INFO,"Player created");
+        Game.log.log(Level.INFO, "Player created");
     }
 
     @Override
     public void move(int dx, int dy) {
         checkCollisionWithWalls(dx, dy);
-            x += dx;
-            y += dy;
+        x += dx;
+        y += dy;
     }
 
     @Override
@@ -40,8 +40,8 @@ public class Player extends MovableEntity implements KeyListener {
         g.drawImage(texture, x, y, width, height, null);
     }
 
-    private void getTexture(){
-        try{
+    private void getTexture() {
+        try {
             texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.defaultPlayerTexture)));
         } catch (IOException e) {
             Game.log.log(Level.WARNING, "Player texture not found");
@@ -134,7 +134,8 @@ public class Player extends MovableEntity implements KeyListener {
             dx = 0;
             dy = 0;
         }
-
-        move(dx, dy);
+        if (!Game.isPaused) {
+            move(dx, dy);
+        }
     }
 }
