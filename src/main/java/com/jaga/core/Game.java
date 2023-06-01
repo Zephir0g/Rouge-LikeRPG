@@ -2,18 +2,13 @@ package com.jaga.core;
 
 import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
-<<<<<<< HEAD
 import com.jaga.core.entities.gameField.BasicField;
 import com.jaga.core.entities.movableObjects.Player;
 import com.jaga.core.entities.render.EntityRenderer;
 import com.jaga.core.entities.staticObjects.Wall;
-=======
 import com.jaga.config.ConfigLogger;
-import com.jaga.entities.gameField.BasicField;
-import com.jaga.entities.moveObj.Player;
-import com.jaga.entities.render.EntityRenderer;
-import com.jaga.entities.staticObj.Wall;
->>>>>>> origin/dev
+
+
 
 import javax.swing.*;
 import java.awt.*;

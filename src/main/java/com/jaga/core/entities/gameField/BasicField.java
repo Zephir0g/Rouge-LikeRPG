@@ -1,12 +1,9 @@
 package com.jaga.core.entities.gameField;
 
 import com.jaga.config.ConfigEntity;
-<<<<<<< HEAD:src/main/java/com/jaga/core/entities/gameField/BasicField.java
 import com.jaga.core.Game;
 import com.jaga.core.entities.staticObjects.Wall;
-=======
-import com.jaga.entities.staticObj.Wall;
->>>>>>> origin/dev:src/main/java/com/jaga/entities/gameField/BasicField.java
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +12,8 @@ import java.util.logging.Logger;
 
 public class BasicField {
 
-    private static final Logger log = Logger.getLogger(BasicField.class.getName());
-
     public BasicField() {
-        log.log(Level.INFO, "Field Created");
+        Game.log.log(Level.INFO, "Field Created");
     }
 
     // red color of this log
