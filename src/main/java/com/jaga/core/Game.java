@@ -27,7 +27,7 @@ public class Game {
     private GraphicsDevice device;
     private Timer updateTimer;
     private FPSMeter fps;
-    private boolean isPaused = false;
+    public static boolean isPaused = false;
 
     int width;
     int height;
@@ -119,11 +119,9 @@ public class Game {
     private void togglePause() {
         if (isPaused) {
             isPaused = false;
-            System.out.println("Unpause");
             updateTimer.start();
         } else {
             isPaused = true;
-            System.out.println("Pause");
             updateTimer.stop();
         }
     }
