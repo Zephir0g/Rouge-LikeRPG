@@ -46,11 +46,14 @@ public class Player extends MovableEntity implements KeyListener {
 
     public boolean checkCollisionWithWalls(int dx, int dy) {
         List<Wall> walls = ConfigCore.walls;
+        // Create a rectangle representing the player's position after applying the specified changes.
         Rectangle playerRect = new Rectangle(x + dx, y + dy, width, height);
 
         for (Wall wall : walls) {
+            // Create a rectangle representing the current wall.
             Rectangle wallRect = new Rectangle(wall.getX(), wall.getY(), wall.getWidth(), wall.getHeight());
 
+            // Check if the player's rectangle intersects with the wall's rectangle.
             if (playerRect.intersects(wallRect)) {
                 return true;
             }
