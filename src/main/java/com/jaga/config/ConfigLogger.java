@@ -1,5 +1,8 @@
 package com.jaga.config;
 
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
+
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -9,15 +12,22 @@ import static com.jaga.core.Game.log;
 
 public class ConfigLogger {
 
-    public static void LoggerColor() {
+    public static ConsoleHandler LoggerColor() {
         ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new SimpleFormatter() {
+
+
+        consoleHandler.setFormatter(getSimpleFormatter());
+
+        return consoleHandler;
+    }
+
+    public static SimpleFormatter getSimpleFormatter() {
+        return new SimpleFormatter(){
             private static final String COLOR_INFO = "\u001B[36m"; // blue
             private static final String COLOR_WARNING = "\u001B[33m"; // yellow
             private static final String COLOR_SEVERE = "\u001B[31m"; // red
             private static final String COLOR_BASE = "\u001B[37m"; // white
             private static final String COLOR_RESET = "\u001B[0m"; // reset
-
 
             @Override
             public synchronized String format(LogRecord record) {
@@ -46,10 +56,7 @@ public class ConfigLogger {
                 return String.format(time + " %2$s %3$s " + separator + " %4$s%n",
                         record.getMillis(), level, path, message);
             }
-        });
-
-        log.addHandler(consoleHandler);
-        log.setUseParentHandlers(false);
+        };
     }
 
 }
