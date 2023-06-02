@@ -16,6 +16,9 @@ import java.util.logging.Level;
 
 public class Player extends MovableEntity implements KeyListener {
     private Image texture;
+
+    private int velocityX = 0;
+    private int velocityY = 0;
     private boolean upPressed = false;
     private boolean downPressed = false;
     private boolean leftPressed = false;
@@ -30,14 +33,24 @@ public class Player extends MovableEntity implements KeyListener {
     @Override
     public void move(int dx, int dy) {
         checkCollisionWithWalls(dx, dy);
+
         x += dx;
         y += dy;
+
+        System.out.println("Player x: " + x + " y: " + y);
     }
 
     @Override
     public void draw(Graphics g) {
         g.drawImage(texture, x, y, width, height, null);
     }
+
+    public void tick(){
+        if (!Game.isPaused()) {
+            move(getVelocityX(), getVelocityY());
+        }
+    }
+
 
     private void getTexture() {
         try {
@@ -73,15 +86,17 @@ public class Player extends MovableEntity implements KeyListener {
 
         if (keyCode == KeyEvent.VK_W) {
             upPressed = true;
+            setVelocityY(-5);
         } else if (keyCode == KeyEvent.VK_S) {
             downPressed = true;
+            setVelocityY(5);
         } else if (keyCode == KeyEvent.VK_A) {
             leftPressed = true;
+            setVelocityX(-5);
         } else if (keyCode == KeyEvent.VK_D) {
             rightPressed = true;
+            setVelocityX(5);
         }
-
-        updateMovement();
     }
 
     @Override
@@ -89,16 +104,19 @@ public class Player extends MovableEntity implements KeyListener {
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_W) {
-            upPressed = false;
+            upPressed = true;
+            setVelocityY(0);
         } else if (keyCode == KeyEvent.VK_S) {
-            downPressed = false;
+            downPressed = true;
+            setVelocityY(0);
         } else if (keyCode == KeyEvent.VK_A) {
-            leftPressed = false;
+            leftPressed = true;
+            setVelocityX(0);
         } else if (keyCode == KeyEvent.VK_D) {
-            rightPressed = false;
+            rightPressed = true;
+            setVelocityX(0);
         }
 
-        updateMovement();
     }
 
     @Override
@@ -133,8 +151,22 @@ public class Player extends MovableEntity implements KeyListener {
             dx = 0;
             dy = 0;
         }
-        if (!Game.isPaused()) {
-            move(dx, dy);
-        }
+
+    }
+
+    public int getVelocityX() {
+        return velocityX;
+    }
+
+    public void setVelocityX(int velocityX) {
+        this.velocityX = velocityX;
+    }
+
+    public int getVelocityY() {
+        return velocityY;
+    }
+
+    public void setVelocityY(int velocityY) {
+        this.velocityY = velocityY;
     }
 }

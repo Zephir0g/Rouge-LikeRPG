@@ -31,6 +31,7 @@ public class Game {
     private Timer updateTimer;
     private FPSMeter fps;
     private TerminalGame terminal = new TerminalGame();
+    private Player player;
     private static boolean isPaused = false;
     private static boolean isDevProfile = false;
     // private Terminal terminal = new Terminal();
@@ -46,6 +47,7 @@ public class Game {
 
         updateTimer = new Timer(1, e -> {
             fps.update();
+            player.tick();
             renderer.repaint();
         });
 
@@ -153,7 +155,7 @@ public class Game {
     }
 
     private void initEntities() {
-        Player player = new Player(width / 2 - 60, height / 2 - 60, ConfigEntity.playerWidth, ConfigEntity.playerHeight);
+        player = new Player(width / 2 - 60, height / 2 - 60, ConfigEntity.playerWidth, ConfigEntity.playerHeight);
 
         //renderer.addEntity(wall);
         BasicField basicField = new BasicField();
