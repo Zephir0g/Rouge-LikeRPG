@@ -3,6 +3,7 @@ package com.jaga.core;
 import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
 import com.jaga.config.ConfigLogger;
+import com.jaga.core.entities.BasicEntity;
 import com.jaga.core.entities.gameField.BasicField;
 import com.jaga.core.entities.movableObjects.Player;
 import com.jaga.core.entities.render.EntityRenderer;
@@ -14,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +26,7 @@ public class Game {
     private static boolean isFullscreen = true;
 
     private JFrame frame;
-    private EntityRenderer renderer;
+    private static EntityRenderer renderer;
     private GraphicsDevice device;
     private Timer updateTimer;
     private FPSMeter fps;
@@ -37,9 +39,8 @@ public class Game {
     int height;
 
     public Game() {
-        log.addHandler(ConfigLogger.LoggerColor());
-
         log.setUseParentHandlers(false);
+        log.addHandler(ConfigLogger.LoggerColor());
         initGraphics();
 
 
@@ -174,4 +175,13 @@ public class Game {
     public static void setIsPaused(boolean isPaused) {
         Game.isPaused = isPaused;
     }
+
+    public static void addRenderedEntity(BasicEntity entity) {
+       renderer.addEntity(entity);
+    }
+
+    public static void removeRenderedEntity(BasicEntity entity) {
+       renderer.removeEntity(entity);
+    }
+
 }

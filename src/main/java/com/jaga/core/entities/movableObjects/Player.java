@@ -16,7 +16,6 @@ import java.util.logging.Level;
 
 public class Player extends MovableEntity implements KeyListener {
     private Image texture;
-
     private boolean upPressed = false;
     private boolean downPressed = false;
     private boolean leftPressed = false;
