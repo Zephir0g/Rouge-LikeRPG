@@ -8,6 +8,7 @@ import com.jaga.core.entities.movableObjects.Player;
 import com.jaga.core.entities.render.EntityRenderer;
 import com.jaga.core.entities.staticObjects.FPSMeter;
 import com.jaga.core.entities.staticObjects.Wall;
+import com.jaga.windows.TerminalGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,9 +28,10 @@ public class Game {
     private GraphicsDevice device;
     private Timer updateTimer;
     private FPSMeter fps;
+    private TerminalGame terminal = new TerminalGame();
     private static boolean isPaused = false;
     private static boolean isDevProfile = false;
-   // private Terminal terminal = new Terminal();
+    // private Terminal terminal = new Terminal();
 
     int width;
     int height;
@@ -42,8 +44,8 @@ public class Game {
 
 
         updateTimer = new Timer(1, e -> {
-                fps.update();
-                renderer.repaint();
+            fps.update();
+            renderer.repaint();
         });
 
         initEntities();
@@ -107,11 +109,13 @@ public class Game {
                     }
                 }
                 if (e.isControlDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_D) {
-                    if(isDevProfile) {
+                    if (isDevProfile) {
                         isDevProfile = false;
+                        terminal.close();
                         log.log(Level.INFO, "Stop dev profile");
                     } else {
                         isDevProfile = true;
+                        terminal.open();
                         log.log(Level.INFO, "Start dev profile");
                     }
                     // Здесь можно выполнить дополнительные действия, связанные с выбором профиля "Dev"
@@ -133,9 +137,11 @@ public class Game {
     private void togglePause() {
         if (isPaused) {
             isPaused = false;
+            log.log(Level.INFO, "Game is paused");
             updateTimer.start();
         } else {
             isPaused = true;
+            log.log(Level.INFO, "Game is unpause");
             updateTimer.stop();
         }
     }
