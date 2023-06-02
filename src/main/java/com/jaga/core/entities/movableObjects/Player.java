@@ -32,11 +32,8 @@ public class Player extends MovableEntity implements KeyListener {
 
     @Override
     public void move(int dx, int dy) {
-        checkCollisionWithWalls(dx, dy);
-
         x += dx;
         y += dy;
-
         System.out.println("Player x: " + x + " y: " + y);
     }
 
@@ -45,12 +42,11 @@ public class Player extends MovableEntity implements KeyListener {
         g.drawImage(texture, x, y, width, height, null);
     }
 
-    public void tick(){
+    public void tick() {
         if (!Game.isPaused()) {
-            move(getVelocityX(), getVelocityY());
+            updateMovement();
         }
     }
-
 
     private void getTexture() {
         try {
@@ -62,14 +58,11 @@ public class Player extends MovableEntity implements KeyListener {
 
     public boolean checkCollisionWithWalls(int dx, int dy) {
         List<Wall> walls = ConfigCore.walls;
-        // Create a rectangle representing the player's position after applying the specified changes.
         Rectangle playerRect = new Rectangle(x + dx, y + dy, width, height);
 
         for (Wall wall : walls) {
-            // Create a rectangle representing the current wall.
             Rectangle wallRect = new Rectangle(wall.getX(), wall.getY(), wall.getWidth(), wall.getHeight());
 
-            // Check if the player's rectangle intersects with the wall's rectangle.
             if (playerRect.intersects(wallRect)) {
                 return true;
             }
@@ -78,10 +71,8 @@ public class Player extends MovableEntity implements KeyListener {
         return false;
     }
 
-
     @Override
     public void keyPressed(KeyEvent e) {
-        //TODO Make a normal movement
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_W) {
@@ -104,19 +95,30 @@ public class Player extends MovableEntity implements KeyListener {
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_W) {
-            upPressed = true;
-            setVelocityY(0);
+            upPressed = false;
+            if (downPressed)
+                setVelocityY(5);
+            else
+                setVelocityY(0);
         } else if (keyCode == KeyEvent.VK_S) {
-            downPressed = true;
-            setVelocityY(0);
+            downPressed = false;
+            if (upPressed)
+                setVelocityY(-5);
+            else
+                setVelocityY(0);
         } else if (keyCode == KeyEvent.VK_A) {
-            leftPressed = true;
-            setVelocityX(0);
+            leftPressed = false;
+            if (rightPressed)
+                setVelocityX(5);
+            else
+                setVelocityX(0);
         } else if (keyCode == KeyEvent.VK_D) {
-            rightPressed = true;
-            setVelocityX(0);
+            rightPressed = false;
+            if (leftPressed)
+                setVelocityX(-5);
+            else
+                setVelocityX(0);
         }
-
     }
 
     @Override
@@ -124,7 +126,7 @@ public class Player extends MovableEntity implements KeyListener {
         // Не используется, оставляем пустым
     }
 
-    private void updateMovement() {
+    public void updateMovement() {
         int dx = 0;
         int dy = 0;
 
@@ -141,17 +143,14 @@ public class Player extends MovableEntity implements KeyListener {
             dx += 10;
         }
 
-        // Проверяем, нажаты ли две клавиши одновременно для диагонального движения
         if ((upPressed || downPressed) && (leftPressed || rightPressed)) {
             dx = (int) (dx * 0.7);
             dy = (int) (dy * 0.7);
         }
 
-        if (checkCollisionWithWalls(dx, dy)) {
-            dx = 0;
-            dy = 0;
+        if (!checkCollisionWithWalls(dx, dy)) {
+            move(dx, dy);
         }
-
     }
 
     public int getVelocityX() {
