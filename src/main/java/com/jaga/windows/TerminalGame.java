@@ -2,6 +2,7 @@ package com.jaga.windows;
 
 import com.jaga.config.ConfigLogger;
 import com.jaga.core.Game;
+import com.jaga.core.commands.CommandHub;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
@@ -22,7 +23,7 @@ import java.io.PrintWriter;
 import java.util.logging.*;
 
 public class TerminalGame extends JFrame {
-    private RSyntaxTextArea textArea;
+    private static RSyntaxTextArea textArea;
     private JTextField inputField;
     private Terminal terminal;
     private PrintWriter terminalWriter;
@@ -117,20 +118,21 @@ public class TerminalGame extends JFrame {
         // Вывод введенной команды в окно
         appendText(">> " + command, true);
 
+        new CommandHub(command);
         // Обработка введенной команды
         // Здесь можно добавить свою логику
-        String response = "You input: " + command;
+        //String response = "You input: " + command;
 
         // Вывод ответа в окно
-        appendText(response, true);
+        //appendText(response, true);
 
         // Прокрутка окна вниз
         textArea.setCaretPosition(textArea.getDocument().getLength());
 
-        terminalWriter.println(response);
+        //terminalWriter.println(response);
     }
 
-    private void appendText(String text, boolean user) {
+    public static void appendText(String text, boolean user) {
         textArea.setEditable(true);
 
         if (user) {
