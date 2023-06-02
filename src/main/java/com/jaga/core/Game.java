@@ -90,15 +90,17 @@ public class Game {
                 if (e.getKeyCode() == KeyEvent.VK_F11) {
                     if (isFullscreen) {
                         frame.dispose();
-                        frame.setUndecorated(true);
+                        frame.setUndecorated(false);
                         frame.setVisible(true);
                         isFullscreen = false;
+                        log.log(Level.INFO, "Fullscreen off");
                     } else {
                         frame.dispose();
                         frame.setUndecorated(false); // Убираем рамки окна
                         device.setFullScreenWindow(frame);
                         frame.setVisible(true);
                         isFullscreen = true;
+                        log.log(Level.INFO, "Fullscreen on");
                     }
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     // Thread safe to pause game
@@ -107,6 +109,9 @@ public class Game {
                     } else {
                         SwingUtilities.invokeLater(() -> togglePause());
                     }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_Q) {
+                    System.exit(0);
                 }
                 if (e.isControlDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_D) {
                     if (isDevProfile) {
@@ -157,9 +162,9 @@ public class Game {
             renderer.addEntity(wall);
         }
         renderer.addEntity(player);
-        renderer.addEntity(fps);
 
         frame.addKeyListener(player);
+        renderer.addEntity(fps);
     }
 
     public static boolean isPaused() {
