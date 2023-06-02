@@ -38,4 +38,12 @@ public class EntityRenderer extends JPanel {
     public static List<BasicEntity> getEntities() {
         return entities;
     }
+
+    public static String getEntitiesString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (BasicEntity entity : entities) {
+            stringBuilder.append(entity.toString()).append("\n");
+        }
+        return stringBuilder.toString();
+    }
 }
