@@ -38,6 +38,9 @@ public class TerminalGame extends JFrame {
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
         textArea.setCodeFoldingEnabled(false);
 
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+
         RTextScrollPane scrollPane = new RTextScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
