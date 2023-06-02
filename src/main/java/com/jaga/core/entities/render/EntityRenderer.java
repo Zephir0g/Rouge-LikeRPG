@@ -19,12 +19,12 @@ public class EntityRenderer extends JPanel {
 
     public void addEntity(BasicEntity entity) {
         entities.add(entity);
-        Game.log.log(Level.INFO, "EntityRenderer added entity: " + entity);
+        Game.log.log(Level.INFO, "EntityRenderer added entity: " + entity.getHashName());
     }
 
     public void removeEntity(BasicEntity entity) {
         entities.remove(entity);
-        Game.log.log(Level.INFO, "EntityRenderer removed entity: " + entity);
+        Game.log.log(Level.INFO, "EntityRenderer removed entity: " + entity.getHashName());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class EntityRenderer extends JPanel {
     public static String getEntitiesString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (BasicEntity entity : entities) {
-            stringBuilder.append(entity.toString()).append("\n");
+            stringBuilder.append(entity.getHashName()).append("\n");
         }
         return stringBuilder.toString();
     }

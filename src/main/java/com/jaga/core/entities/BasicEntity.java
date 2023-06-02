@@ -8,6 +8,7 @@ public abstract class BasicEntity {
     protected int width;
     protected int height;
 
+    protected String hashName;
 
 
     public BasicEntity(int x, int y, int width, int height) {
@@ -15,10 +16,14 @@ public abstract class BasicEntity {
         this.y = y;
         this.width = width;
         this.height = height;
+        createHashName();
     }
 
     public abstract void draw(Graphics g); // Method to draw the entity on the screen
 
+    public void createHashName(){
+        hashName = this.getClass().getSimpleName() + "_" + this.hashCode();
+    };
 
     public int getX() {
         return x;
@@ -50,5 +55,9 @@ public abstract class BasicEntity {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public String getHashName() {
+        return hashName;
     }
 }
