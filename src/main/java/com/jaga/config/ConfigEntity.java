@@ -4,7 +4,7 @@ public class ConfigEntity {
 
     public static final int playerWidth = 120;
     public static final int playerHeight = 120;
-    public static final String defaultPlayerTexture = "/assets/entity/player.png";
+    public static final String defaultPlayerTexture = "/assets/animations/testanim1.png";
 
 
     public static final int wallWidth = 100;
