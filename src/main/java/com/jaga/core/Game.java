@@ -136,13 +136,12 @@ public class Game {
             Obstacles obstacle = new Obstacles(obstacleX, obstacleY, obstacleWidth, obstacleHeight);
             obstacles.add(obstacle);
             renderer.addEntity(obstacle);
-        }
 
+        }
         // Adding obstacles to ConfigCore
         ConfigCore.obstacles = obstacles;
 
     }
-
     public static void switchPlayerByHashName(String hashName) {
         Player newPlayer = (Player) EntityRenderer.getEntitiesMap().get(hashName);
         if (newPlayer != null) {
@@ -206,4 +205,5 @@ public class Game {
     public static void setPlayer(Player player) {
         Game.player = player;
     }
+
 }

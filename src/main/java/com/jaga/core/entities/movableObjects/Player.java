@@ -3,6 +3,7 @@ package com.jaga.core.entities.movableObjects;
 import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
 import com.jaga.core.Game;
+import com.jaga.core.entities.staticObjects.Obstacles;
 import com.jaga.core.entities.staticObjects.Wall;
 
 import javax.imageio.ImageIO;
@@ -71,6 +72,21 @@ public class Player extends MovableEntity implements KeyListener {
             Rectangle wallRect = new Rectangle(wall.getX(), wall.getY(), wall.getWidth(), wall.getHeight());
 
             if (playerRect.intersects(wallRect)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean checkCollisionsWithObstacles(int dx, int dy) {
+        List<Obstacles> obstacles = ConfigCore.obstacles;
+        Rectangle playerRect = new Rectangle(x + dx, y + dy, width, height);
+
+        for (Obstacles obstacle : obstacles) {
+            Rectangle obstacleRect = new Rectangle(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
+
+            if (playerRect.intersects(obstacleRect)) {
                 return true;
             }
         }
