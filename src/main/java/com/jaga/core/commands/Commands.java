@@ -5,6 +5,8 @@ import com.jaga.core.commands.playerCommand.PlayerCommands;
 public enum Commands {
 
     HELP("/help"),
+    PAUSE("/pause"),
+    UNPAUSE("/unpause"),
     ENTITYLIST("/entityList"),
     PLAYER("/player", new ArgumentType(PlayerCommands.CREATE.getCommandName()));
     // Добавьте другие команды, которые вам нужны

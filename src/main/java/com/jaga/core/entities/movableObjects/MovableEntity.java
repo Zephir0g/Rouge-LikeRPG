@@ -4,7 +4,7 @@ import com.jaga.core.entities.BasicEntity;
 
 import java.awt.*;
 
-public class MovableEntity extends BasicEntity {
+public abstract class MovableEntity extends BasicEntity {
     public MovableEntity(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
