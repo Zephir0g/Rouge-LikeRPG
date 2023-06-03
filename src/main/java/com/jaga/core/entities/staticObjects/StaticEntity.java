@@ -4,7 +4,7 @@ import com.jaga.core.entities.BasicEntity;
 
 import java.awt.*;
 
-public class StaticEntity extends BasicEntity {
+public abstract class StaticEntity extends BasicEntity {
     public StaticEntity(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
