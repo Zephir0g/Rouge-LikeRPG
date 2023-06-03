@@ -43,8 +43,10 @@ public class Game {
 
         updateTimer = new Timer(1, e -> {
             fps.update();
-            player.tick();
             renderer.repaint();
+        });
+        Timer playerMoveTimer = new Timer(1, e -> {
+            player.tick();
         });
 
         initEntities();
@@ -53,6 +55,7 @@ public class Game {
         frame.setVisible(true);
         log.log(Level.INFO, "Start game");
 
+        playerMoveTimer.start();
         updateTimer.start();
     }
 
