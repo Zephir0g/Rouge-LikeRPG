@@ -32,17 +32,9 @@ public class Wall extends StaticEntity{
         }
     }
 
-    /*
-    public void setTexture(BufferedImage texture) {
-        this.texture = texture;
-    }
-    */
-
     @Override
     public void draw(Graphics g) {
         // TODO Реализация отрисовки игрока (ассетами)
-//        g.setColor(Color.BLACK);
-//        g.fillRect(x, y, width, height);
         g.drawImage(texture, x, y, width, height, null);
 
         int textureWidth = texture.getWidth(null);

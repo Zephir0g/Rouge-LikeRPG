@@ -10,13 +10,13 @@ public abstract class MovableEntity extends BasicEntity {
     }
 
     public void move(int dx, int dy) {
-        // Реализация перемещения сущности
+        // Realization of moving movable entity
         x += dx;
         y += dy;
     }
 
     @Override
     public void draw(Graphics g) {
-        // TODO Реализация отрисовки подвижной сущности
+        // TODO Realization of drawing movable entity
     }
 }

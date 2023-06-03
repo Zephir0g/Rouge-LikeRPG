@@ -100,7 +100,7 @@ public class TerminalGame extends JFrame {
             try {
                 while (true) {
                     String line = lineReader.readLine(">> ");
-                    // Обработка введенной команды
+                    // Обработка введённой команды
                     processCommand(line);
                 }
             } catch (UserInterruptException e) {

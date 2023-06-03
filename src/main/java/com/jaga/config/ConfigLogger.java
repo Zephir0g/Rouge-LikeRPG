@@ -13,14 +13,18 @@ public class ConfigLogger {
     public static ConsoleHandler LoggerColor() {
         ConsoleHandler consoleHandler = new ConsoleHandler();
 
-
+        // Set the formatter for the ConsoleHandler
         consoleHandler.setFormatter(getSimpleFormatter());
 
         return consoleHandler;
     }
 
     public static SimpleFormatter getSimpleFormatter() {
+
+        // Create a new SimpleFormatter with custom formatting
         return new SimpleFormatter(){
+
+            // Colors for log levels
             private static final String COLOR_INFO = "\u001B[36m"; // blue
             private static final String COLOR_WARNING = "\u001B[33m"; // yellow
             private static final String COLOR_SEVERE = "\u001B[31m"; // red
@@ -48,6 +52,7 @@ public class ConfigLogger {
                     message = record.getMessage();
                 }
 
+                // Format the log message with colors and timestamps
                 time = String.format(COLOR_BASE + "[%1$tF %1$tT]" + COLOR_RESET, record.getMillis());
                 separator = String.format(COLOR_BASE + " : " + COLOR_RESET);
 

@@ -37,7 +37,7 @@ public class GameKeyListener {
                         Game.log.log(Level.INFO, "Fullscreen off");
                     } else {
                         frame.dispose();
-                        frame.setUndecorated(false); // Убираем рамки окна
+                        frame.setUndecorated(false); // Getting rid of the title bar
                         device.setFullScreenWindow(frame);
                         Game.setDevice(device);
                         frame.setVisible(true);

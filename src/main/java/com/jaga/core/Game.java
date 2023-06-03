@@ -115,13 +115,10 @@ public class Game {
             renderer.addEntity(wall);
         }
 
-        Obstacles obstacles1 = new Obstacles(666, 200, 88, 88);
-        Obstacles obstacles2 = new Obstacles(555, 300, 88, 88);
-
-        generateObstacles(5);
-        renderer.addEntity(player);
-        frame.addKeyListener(player);
-        renderer.addEntity(fps);
+        generateObstacles(5); // Generate n obstacles
+        renderer.addEntity(player); // Add player to renderer
+        frame.addKeyListener(player); // Add player to keyListener
+        renderer.addEntity(fps);    // Add fps meter to renderer
     }
 
     private void generateObstacles (int numObstacles) {
@@ -129,19 +126,19 @@ public class Game {
         List<Obstacles> obstacles = new ArrayList<>();
 
         for (int i = 0; i < numObstacles; i++) {
-            // Генерируем случайные координаты и размеры для каждого камня
+            // Generating random coordinates and size of obstacle
             int obstacleX = random.nextInt(width - ConfigEntity.obstacleWidth);
             int obstacleY = random.nextInt(height - ConfigEntity.obstacleHeight);
             int obstacleWidth = ConfigEntity.obstacleWidth;
             int obstacleHeight = ConfigEntity.obstacleHeight;
 
-            // Создаем препятствие (камень) с сгенерированными параметрами
+            // Creating obstacle and adding it to renderer and obstacles list
             Obstacles obstacle = new Obstacles(obstacleX, obstacleY, obstacleWidth, obstacleHeight);
             obstacles.add(obstacle);
             renderer.addEntity(obstacle);
         }
 
-        // Добавляем сгенерированные препятствия в рендерер и список препятствий
+        // Adding obstacles to ConfigCore
         ConfigCore.obstacles = obstacles;
 
     }
@@ -153,7 +150,7 @@ public class Game {
             player = newPlayer;
             frame.addKeyListener(player);
         } else {
-            // Игрок с заданным hashName не найден
+            // Player not found by hashName
             System.out.println("Player with hashName " + hashName + " not found.");
         }
     }

@@ -29,7 +29,6 @@ public class Player extends MovableEntity implements KeyListener {
 
     public Player(int x, int y, int width, int height) {
         super(x, y, width, height);
-//        getTexture();
         loadAnimationFrames();
         currentFrame = 0;
         Game.log.log(Level.INFO, "Player created");
@@ -38,6 +37,7 @@ public class Player extends MovableEntity implements KeyListener {
     private void loadAnimationFrames() {
         animationFrames = new Image[3];
         try {
+            // load animation frames from resources/assets/animations
             animationFrames[0] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.defaultPlayerTexture)));
             animationFrames[1] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/animations/testanim2.png")));
             animationFrames[2] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/animations/testanim3.png")));
@@ -50,7 +50,6 @@ public class Player extends MovableEntity implements KeyListener {
     public void move(int dx, int dy) {
         x += dx;
         y += dy;
-        System.out.println("Player x: " + x + " y: " + y);
     }
 
     @Override
@@ -63,14 +62,6 @@ public class Player extends MovableEntity implements KeyListener {
             updateMovement();
         }
     }
-
-//    private void getTexture() {
-//        try {
-//            texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.defaultPlayerTexture)));
-//        } catch (IOException e) {
-//            Game.log.log(Level.WARNING, "Player texture not found");
-//        }
-//    }
 
     public boolean checkCollisionWithWalls(int dx, int dy) {
         List<Wall> walls = ConfigCore.walls;
@@ -139,7 +130,7 @@ public class Player extends MovableEntity implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // Не используется, оставляем пустым
+        // Not used
     }
 
     public void updateMovement() {

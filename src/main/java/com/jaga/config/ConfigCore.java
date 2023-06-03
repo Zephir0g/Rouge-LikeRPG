@@ -7,9 +7,9 @@ import java.util.List;
 
 public class ConfigCore {
 
-    public static List<Wall> walls;
+    public static List<Wall> walls; // List of walls in the game
 
     public static int width, height;
+    public static List<Obstacles> obstacles; // List of obstacles in the game
 
-    public static List<Obstacles> obstacles;
 }

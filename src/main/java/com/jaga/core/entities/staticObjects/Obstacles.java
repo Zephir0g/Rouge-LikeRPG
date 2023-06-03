@@ -13,14 +13,14 @@ public class Obstacles extends BasicEntity{
 
     private Image texture;
 
-    public Obstacles (int x, int y, int width, int height) {
+    public Obstacles (int x, int y, int width, int height) { // constructor for obstacles
         super(x, y, width, height);
         getStoneTexture(ConfigEntity.obstacleStoneTexture);
     }
 
     private void getStoneTexture(String texturePath){
         try{
-            texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath)));
+            texture = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(texturePath))); //set stone texture
         } catch (IOException e) {
             Game.log.log(Level.WARNING, "Obstacle_Stone texture not found");
         }
@@ -28,9 +28,6 @@ public class Obstacles extends BasicEntity{
 
     @Override
     public void draw(Graphics g) {
-//        g.setColor(Color.BLACK); //temp, then we will make textures
-//        g.fillRect(getX(), getY(), getWidth(), getHeight());
-
         g.drawImage(texture, x, y, width, height, null);
 
         int textureWidth = texture.getWidth(null);
