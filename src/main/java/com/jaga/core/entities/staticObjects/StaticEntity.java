@@ -14,6 +14,7 @@ public class StaticEntity extends BasicEntity {
         // TODO Реализация отрисовки объектов
     }
 
+
     @Override
     public void setX(int x) {
         super.setX(x);

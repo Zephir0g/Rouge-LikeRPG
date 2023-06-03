@@ -8,6 +8,7 @@ import com.jaga.core.entities.gameField.BasicField;
 import com.jaga.core.entities.movableObjects.Player;
 import com.jaga.core.entities.render.EntityRenderer;
 import com.jaga.core.entities.staticObjects.FPSMeter;
+import com.jaga.core.entities.staticObjects.Obstacles;
 import com.jaga.core.entities.staticObjects.Wall;
 import com.jaga.keyListener.GameKeyListener;
 import com.jaga.windows.TerminalGame;
@@ -113,8 +114,13 @@ public class Game {
         for (Wall wall : ConfigCore.walls) {
             renderer.addEntity(wall);
         }
-        renderer.addEntity(player);
 
+        Obstacles obstacles1 = new Obstacles(666, 200, 88, 88);
+        Obstacles obstacles2 = new Obstacles(555, 300, 88, 88);
+
+        renderer.addEntity(obstacles1);
+        renderer.addEntity(obstacles2);
+        renderer.addEntity(player);
         frame.addKeyListener(player);
         renderer.addEntity(fps);
     }

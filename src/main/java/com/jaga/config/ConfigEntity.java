@@ -11,6 +11,7 @@ public class ConfigEntity {
     public static final int wallHeight = 100;
     public static final String defaultWallTexture = "/assets/entity/wall.png";
     public static final String sideWallTexture = "/assets/entity/wall2.jpg";
+    public static final String obstacleStoneTexture = "/assets/entity/obstacle_stone.png";
 
 
 
