@@ -6,6 +6,6 @@ import com.jaga.windows.TerminalGame;
 
 public class EntityListCommandExecutor {
     public EntityListCommandExecutor() {
-        TerminalGame.appendText("Entity list: " + EntityRenderer.getEntitiesString(), true);
+        TerminalGame.appendText("Entity list: \n" + EntityRenderer.getEntitiesString(), true);
     }
 }

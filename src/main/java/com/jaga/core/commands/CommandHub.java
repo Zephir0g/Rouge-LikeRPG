@@ -18,23 +18,17 @@ public class CommandHub {
         Commands commands = Commands.findCommand(splitCommand[0]);
         if (commands != null) {
             switch (commands) {
-                case HELP:
-                    new HelpCommandExecutor();
-                    break;
-                case ENTITYLIST:
-                    new EntityListCommandExecutor();
-                    break;
-                case PLAYER:
-                    new PlayerCommandHub(args);
-                    break;
-                case PAUSE:
+                case HELP -> new HelpCommandExecutor(commands);
+                case ENTITYLIST -> new EntityListCommandExecutor();
+                case PLAYER -> new PlayerCommandHub(args);
+                case PAUSE -> {
                     Game.setIsPaused(true);
                     Game.log.log(Level.INFO, "Game is paused");
-                    break;
-                case UNPAUSE:
+                }
+                case UNPAUSE -> {
                     Game.setIsPaused(false);
                     Game.log.log(Level.INFO, "Game is unpause");
-                    break;
+                }
             }
         } else {
             TerminalGame.appendText("Unknown command, see available commands by /help", true);
