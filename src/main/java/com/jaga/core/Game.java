@@ -9,6 +9,7 @@ import com.jaga.core.entities.movableObjects.Player;
 import com.jaga.core.entities.render.EntityRenderer;
 import com.jaga.core.entities.staticObjects.FPSMeter;
 import com.jaga.core.entities.staticObjects.Wall;
+import com.jaga.keyListener.GameKeyListener;
 import com.jaga.windows.TerminalGame;
 
 import javax.swing.*;
@@ -25,10 +26,13 @@ public class Game {
 
     private static boolean isFullscreen = true;
 
-    private JFrame frame;
+    private static JFrame frame;
     private static EntityRenderer renderer;
-    private GraphicsDevice device;
-    private Timer updateTimer;
+
+
+
+    private static GraphicsDevice device;
+    private static Timer updateTimer;
     private FPSMeter fps;
     private TerminalGame terminal = new TerminalGame();
     private Player player;
@@ -52,7 +56,7 @@ public class Game {
         });
 
         initEntities();
-        addKeyListener();
+        frame.addKeyListener(GameKeyListener.addKeyListener(terminal));
 
         frame.setVisible(true);
         log.log(Level.INFO, "Start game");
@@ -85,64 +89,9 @@ public class Game {
         device.setFullScreenWindow(frame); // Set full screen mode
     }
 
-    private void addKeyListener() {
-        frame.addKeyListener(new KeyListener() {
-            @Override
-            public void keyPressed(KeyEvent e) {
 
-                if (e.getKeyCode() == KeyEvent.VK_F11) {
-                    if (isFullscreen) {
-                        frame.dispose();
-                        frame.setUndecorated(false);
-                        frame.setVisible(true);
-                        isFullscreen = false;
-                        log.log(Level.INFO, "Fullscreen off");
-                    } else {
-                        frame.dispose();
-                        frame.setUndecorated(false); // Убираем рамки окна
-                        device.setFullScreenWindow(frame);
-                        frame.setVisible(true);
-                        isFullscreen = true;
-                        log.log(Level.INFO, "Fullscreen on");
-                    }
-                } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    // Thread safe to pause game
-                    if (SwingUtilities.isEventDispatchThread()) {
-                        togglePause();
-                    } else {
-                        SwingUtilities.invokeLater(() -> togglePause());
-                    }
-                }
-                if (e.getKeyCode() == KeyEvent.VK_Q) {
-                    System.exit(0);
-                }
-                if (e.isControlDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_D) {
-                    if (isDevProfile) {
-                        isDevProfile = false;
-                        terminal.close();
-                        log.log(Level.INFO, "Stop dev profile");
-                    } else {
-                        isDevProfile = true;
-                        terminal.open();
-                        log.log(Level.INFO, "Start dev profile");
-                    }
-                    // Здесь можно выполнить дополнительные действия, связанные с выбором профиля "Dev"
-                }
-            }
 
-            @Override
-            public void keyTyped(KeyEvent e) {
-                // Не используется
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                // Не используется
-            }
-        });
-    }
-
-    private void togglePause() {
+    public static void togglePause() {
         if (isPaused) {
             isPaused = false;
             log.log(Level.INFO, "Game is paused");
@@ -186,4 +135,29 @@ public class Game {
        renderer.removeEntity(entity);
     }
 
+    public static boolean isIsFullscreen() {
+        return isFullscreen;
+    }
+
+    public static void setIsFullscreen(boolean isFullscreen) {
+        Game.isFullscreen = isFullscreen;
+    }
+
+    public static JFrame getFrame() {
+        return frame;
+    }
+    public static GraphicsDevice getDevice() {
+        return device;
+    }
+    public static void setDevice(GraphicsDevice device) {
+        device = device;
+    }
+
+    public static boolean isIsDevProfile() {
+        return isDevProfile;
+    }
+
+    public static void setIsDevProfile(boolean isDevProfile) {
+        Game.isDevProfile = isDevProfile;
+    }
 }
