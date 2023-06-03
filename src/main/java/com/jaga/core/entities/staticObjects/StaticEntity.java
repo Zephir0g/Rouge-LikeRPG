@@ -1,6 +1,7 @@
 package com.jaga.core.entities.staticObjects;
 
 import com.jaga.core.entities.BasicEntity;
+import com.jaga.core.entities.movableObjects.Player;
 
 import java.awt.*;
 

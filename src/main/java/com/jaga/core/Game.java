@@ -4,12 +4,13 @@ import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
 import com.jaga.config.ConfigLogger;
 import com.jaga.core.entities.BasicEntity;
-import com.jaga.core.entities.gameField.BasicField;
 import com.jaga.core.entities.movableObjects.Player;
 import com.jaga.core.entities.render.EntityRenderer;
 import com.jaga.core.entities.staticObjects.FPSMeter;
 import com.jaga.core.entities.staticObjects.Obstacles;
+import com.jaga.core.entities.staticObjects.StaticEntity;
 import com.jaga.core.entities.staticObjects.Wall;
+import com.jaga.core.entities.staticObjects.gameField.BasicField;
 import com.jaga.keyListener.GameKeyListener;
 import com.jaga.windows.TerminalGame;
 
@@ -110,8 +111,8 @@ public class Game {
         //renderer.addEntity(wall);
         BasicField basicField = new BasicField();
         fps = new FPSMeter(10, 10, 10, 10);
-        ConfigCore.walls = basicField.creatGameFieldWalls(width, height);
-        for (Wall wall : ConfigCore.walls) {
+        basicField.creatGameFieldWalls(width, height);
+        for (StaticEntity wall : ConfigCore.staticEntities) {
             renderer.addEntity(wall);
         }
 
@@ -153,6 +154,8 @@ public class Game {
             System.out.println("Player with hashName " + hashName + " not found.");
         }
     }
+
+
 
     public static boolean isPaused() {
         return isPaused;

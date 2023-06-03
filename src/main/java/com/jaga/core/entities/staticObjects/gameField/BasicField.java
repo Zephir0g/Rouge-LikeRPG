@@ -1,5 +1,6 @@
-package com.jaga.core.entities.gameField;
+package com.jaga.core.entities.staticObjects.gameField;
 
+import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
 import com.jaga.core.Game;
 import com.jaga.core.entities.staticObjects.Wall;
@@ -21,16 +22,15 @@ public class BasicField {
     //TODO fix Field Created log
 
 
-    public List<Wall> creatGameFieldWalls(int screenWidth, int screenHeight) {
+    public void creatGameFieldWalls(int screenWidth, int screenHeight) {
 
         int backgroundWidth = (int) (screenWidth * 0.15);
 
         List<Wall> walls = new ArrayList<>();
         walls.addAll(createMainWallFrame(backgroundWidth, screenWidth, screenHeight));
         walls.addAll(createSideLinesGround(backgroundWidth, screenWidth, screenHeight));
+        ConfigCore.staticEntities.addAll(walls);
 
-
-        return walls;
     }
 
     private List<Wall> createMainWallFrame(int backgroundWidth, int screenWidth, int screenHeight){

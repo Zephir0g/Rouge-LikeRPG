@@ -4,6 +4,7 @@ import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
 import com.jaga.core.Game;
 import com.jaga.core.entities.staticObjects.Obstacles;
+import com.jaga.core.entities.staticObjects.StaticEntity;
 import com.jaga.core.entities.staticObjects.Wall;
 
 import javax.imageio.ImageIO;
@@ -60,16 +61,32 @@ public class Player extends MovableEntity implements KeyListener {
 
     public void tick() {
         if (!Game.isPaused()) {
-            updateMovement();
+            for (StaticEntity entity : ConfigCore.staticEntities) {
+                if (isCollidingWith(entity)) {
+                    updateMovement();
+                }
+            }
+
         }
     }
 
+    private boolean isCollidingWith(StaticEntity entity) {
+        if (getX() < getX() + getWidth() &&
+                getX() + getWidth() > getX() &&
+                getY() < getY() + getHeight() &&
+                getY() + getHeight() > getY()) {
+            // Объекты пересекаются, есть столкновение
+            return true;
+        }
+        return false; // Замените это на правильную логику проверки столкновения
+    }
+
     public boolean checkCollisionWithWalls(int dx, int dy) {
-        List<Wall> walls = ConfigCore.walls;
+        List<StaticEntity> staticEntitys = ConfigCore.staticEntities;
         Rectangle playerRect = new Rectangle(x + dx, y + dy, width, height);
 
-        for (Wall wall : walls) {
-            Rectangle wallRect = new Rectangle(wall.getX(), wall.getY(), wall.getWidth(), wall.getHeight());
+        for (StaticEntity staticEntity : staticEntitys) {
+            Rectangle wallRect = new Rectangle(staticEntity.getX(), staticEntity.getY(), staticEntity.getWidth(), staticEntity.getHeight());
 
             if (playerRect.intersects(wallRect)) {
                 return true;
