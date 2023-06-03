@@ -14,5 +14,8 @@ public class ConfigEntity {
     public static final String obstacleStoneTexture = "/assets/entity/obstacle_stone.png";
 
 
+    public static final int obstacleWidth = 100;
+    public static final int obstacleHeight = 100;
+
 
 }

@@ -15,8 +15,14 @@ import com.jaga.windows.TerminalGame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static com.jaga.config.ConfigCore.height;
+import static com.jaga.config.ConfigCore.width;
 
 public class Game {
 
@@ -69,10 +75,10 @@ public class Game {
 
         //Get the screen size
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        ConfigCore.width = screenSize.width;
-        ConfigCore.height = screenSize.height;
+        width = screenSize.width;
+        height = screenSize.height;
 
-        frame.setSize(ConfigCore.width, ConfigCore.height);
+        frame.setSize(width, height);
         frame.setResizable(false);
 
         //Fullscreen
@@ -99,12 +105,12 @@ public class Game {
     }
 
     private void initEntities() {
-        player = new Player(ConfigCore.width / 2 - 60, ConfigCore.height / 2 - 60, ConfigEntity.playerWidth, ConfigEntity.playerHeight);
+        player = new Player(width / 2 - 60, height / 2 - 60, ConfigEntity.playerWidth, ConfigEntity.playerHeight);
 
         //renderer.addEntity(wall);
         BasicField basicField = new BasicField();
         fps = new FPSMeter(10, 10, 10, 10);
-        ConfigCore.walls = basicField.creatGameFieldWalls(ConfigCore.width, ConfigCore.height);
+        ConfigCore.walls = basicField.creatGameFieldWalls(width, height);
         for (Wall wall : ConfigCore.walls) {
             renderer.addEntity(wall);
         }
@@ -112,11 +118,32 @@ public class Game {
         Obstacles obstacles1 = new Obstacles(666, 200, 88, 88);
         Obstacles obstacles2 = new Obstacles(555, 300, 88, 88);
 
-        renderer.addEntity(obstacles1);
-        renderer.addEntity(obstacles2);
+        generateObstacles(5);
         renderer.addEntity(player);
         frame.addKeyListener(player);
         renderer.addEntity(fps);
+    }
+
+    private void generateObstacles (int numObstacles) {
+        Random random = new Random();
+        List<Obstacles> obstacles = new ArrayList<>();
+
+        for (int i = 0; i < numObstacles; i++) {
+            // Генерируем случайные координаты и размеры для каждого камня
+            int obstacleX = random.nextInt(width - ConfigEntity.obstacleWidth);
+            int obstacleY = random.nextInt(height - ConfigEntity.obstacleHeight);
+            int obstacleWidth = ConfigEntity.obstacleWidth;
+            int obstacleHeight = ConfigEntity.obstacleHeight;
+
+            // Создаем препятствие (камень) с сгенерированными параметрами
+            Obstacles obstacle = new Obstacles(obstacleX, obstacleY, obstacleWidth, obstacleHeight);
+            obstacles.add(obstacle);
+            renderer.addEntity(obstacle);
+        }
+
+        // Добавляем сгенерированные препятствия в рендерер и список препятствий
+        ConfigCore.obstacles = obstacles;
+
     }
 
     public static void switchPlayerByHashName(String hashName) {
