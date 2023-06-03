@@ -8,7 +8,9 @@ public enum Commands {
     PAUSE("/pause"),
     UNPAUSE("/unpause"),
     ENTITYLIST("/entityList"),
-    PLAYER("/player", new ArgumentType(PlayerCommands.CREATE.getCommandName()));
+    PLAYER("/player",
+            new ArgumentType(PlayerCommands.CREATE.getCommandName()), new ArgumentType(PlayerCommands.SWITCH.getCommandName()),
+            new ArgumentType(PlayerCommands.HELP.getCommandName()));
     // Добавьте другие команды, которые вам нужны
 
     // Конструкторы для каждой команды

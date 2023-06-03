@@ -6,44 +6,47 @@ import com.jaga.core.entities.BasicEntity;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
 public class EntityRenderer extends JPanel {
-    private static List<BasicEntity> entities;
+    private static HashMap<String, BasicEntity> entitiesMap;
 
     public EntityRenderer() {
-        entities = new ArrayList<>();
+        entitiesMap = new HashMap<>();
         Game.log.log(Level.INFO, "EntityRenderer created");
     }
 
     public void addEntity(BasicEntity entity) {
-        entities.add(entity);
+        entitiesMap.put(entity.getHashName(), entity);
         Game.log.log(Level.INFO, "EntityRenderer added entity: " + entity.getHashName());
     }
 
     public void removeEntity(BasicEntity entity) {
-        entities.remove(entity);
+        entitiesMap.remove(entity.getHashName());
         Game.log.log(Level.INFO, "EntityRenderer removed entity: " + entity.getHashName());
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (BasicEntity entity : entities) {
+        //write code for drawing entities from entitiesMap
+
+        for (BasicEntity entity : entitiesMap.values()) {
             entity.draw(g);
         }
     }
 
-    public static List<BasicEntity> getEntities() {
-        return entities;
-    }
-
     public static String getEntitiesString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (BasicEntity entity : entities) {
-            stringBuilder.append(entity.getHashName()).append("\n");
+        for(String key : entitiesMap.keySet()) {
+            stringBuilder.append(key).append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    public static HashMap<String, BasicEntity> getEntitiesMap() {
+        return entitiesMap;
     }
 }

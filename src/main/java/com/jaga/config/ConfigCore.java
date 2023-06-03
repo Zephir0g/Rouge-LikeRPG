@@ -7,4 +7,6 @@ import java.util.List;
 public class ConfigCore {
 
     public static List<Wall> walls;
+
+    public static int width, height;
 }

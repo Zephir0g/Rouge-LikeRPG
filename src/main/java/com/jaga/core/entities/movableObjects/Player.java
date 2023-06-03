@@ -50,7 +50,7 @@ public class Player extends MovableEntity implements KeyListener {
     public void move(int dx, int dy) {
         x += dx;
         y += dy;
-//        System.out.println("Player x: " + x + " y: " + y);
+        System.out.println("Player x: " + x + " y: " + y);
     }
 
     @Override

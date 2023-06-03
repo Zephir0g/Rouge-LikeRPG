@@ -3,8 +3,10 @@ package com.jaga.core.commands.playerCommand;
 import com.jaga.core.commands.ArgumentType;
 
 public enum PlayerCommands {
-    CREATE("create");
-    // Добавьте другие команды, которые вам нужны
+    CREATE("create"),
+    HELP("help"),
+    SWITCH("switch", new ArgumentType("player code")),;
+    // Добавьте другие команды, которые вам нужqны
 
     // Конструкторы для каждой команды
     private final String commandName;
@@ -31,6 +33,10 @@ public enum PlayerCommands {
         return builder.toString();
     }
 
+    public String getCommandNameWithoutArgs() {
+        return commandName;
+    }
+
 
     // Получение аргументов команды
     public ArgumentType[] getArgumentTypes() {
@@ -39,7 +45,7 @@ public enum PlayerCommands {
 
     public static PlayerCommands findCommand(String commandName) {
         for (PlayerCommands command : PlayerCommands.values()) {
-            if (command.getCommandName().equalsIgnoreCase(commandName)) {
+            if (command.getCommandNameWithoutArgs().equalsIgnoreCase(commandName)) {
                 return command;
             }
         }

@@ -115,21 +115,10 @@ public class TerminalGame extends JFrame {
     }
 
     private void processCommand(String command) {
-        // Вывод введенной команды в окно
         appendText(">> " + command, true);
 
         new CommandHub(command);
-        // Обработка введенной команды
-        // Здесь можно добавить свою логику
-        //String response = "You input: " + command;
-
-        // Вывод ответа в окно
-        //appendText(response, true);
-
-        // Прокрутка окна вниз
         textArea.setCaretPosition(textArea.getDocument().getLength());
-
-        //terminalWriter.println(response);
     }
 
     public static void appendText(String text, boolean user) {
