@@ -7,6 +7,7 @@ public class ConfigEntity {
     // Player entity
     public static final int playerWidth = 120;
     public static final int playerHeight = 120;
+    public static final int playerSpeed = 5;
     public static final String defaultPlayerTexture = "/assets/animations/testanim1.png";
 
     // Wall entity

@@ -3,9 +3,7 @@ package com.jaga.core.entities.movableObjects;
 import com.jaga.config.ConfigCore;
 import com.jaga.config.ConfigEntity;
 import com.jaga.core.Game;
-import com.jaga.core.entities.staticObjects.Obstacles;
 import com.jaga.core.entities.staticObjects.StaticEntity;
-import com.jaga.core.entities.staticObjects.Wall;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -61,34 +59,31 @@ public class Player extends MovableEntity implements KeyListener {
 
     public void tick() {
         if (!Game.isPaused()) {
-            for (StaticEntity entity : ConfigCore.staticEntities) {
-                if (isCollidingWith(entity)) {
-                    updateMovement();
-                }
-            }
-
+            updateMovement();
         }
     }
+
 
     private boolean isCollidingWith(StaticEntity entity) {
         if (getX() < getX() + getWidth() &&
                 getX() + getWidth() > getX() &&
                 getY() < getY() + getHeight() &&
                 getY() + getHeight() > getY()) {
-            // Объекты пересекаются, есть столкновение
+            // Objects colliding
             return true;
         }
-        return false; // Замените это на правильную логику проверки столкновения
+        return false; // change this for other collision logic
     }
 
-    public boolean checkCollisionWithWalls(int dx, int dy) {
+    public boolean checkCollision(int dx, int dy) {
+        //TODO fix collision detection, when player collides with wall, it gets stuck
         List<StaticEntity> staticEntitys = ConfigCore.staticEntities;
         Rectangle playerRect = new Rectangle(x + dx, y + dy, width, height);
 
         for (StaticEntity staticEntity : staticEntitys) {
             Rectangle wallRect = new Rectangle(staticEntity.getX(), staticEntity.getY(), staticEntity.getWidth(), staticEntity.getHeight());
 
-            if (playerRect.intersects(wallRect)) {
+            if (staticEntity.isCollidingWith(this)) {
                 return true;
             }
         }
@@ -96,20 +91,6 @@ public class Player extends MovableEntity implements KeyListener {
         return false;
     }
 
-    public boolean checkCollisionsWithObstacles(int dx, int dy) {
-        List<Obstacles> obstacles = ConfigCore.obstacles;
-        Rectangle playerRect = new Rectangle(x + dx, y + dy, width, height);
-
-        for (Obstacles obstacle : obstacles) {
-            Rectangle obstacleRect = new Rectangle(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
-
-            if (playerRect.intersects(obstacleRect)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -117,16 +98,16 @@ public class Player extends MovableEntity implements KeyListener {
 
         if (keyCode == KeyEvent.VK_W) {
             upPressed = true;
-            setVelocityY(-5);
+            setVelocityY(-1);
         } else if (keyCode == KeyEvent.VK_S) {
             downPressed = true;
-            setVelocityY(5);
+            setVelocityY(1);
         } else if (keyCode == KeyEvent.VK_A) {
             leftPressed = true;
-            setVelocityX(-5);
+            setVelocityX(-1);
         } else if (keyCode == KeyEvent.VK_D) {
             rightPressed = true;
-            setVelocityX(5);
+            setVelocityX(1);
         }
     }
 
@@ -137,25 +118,25 @@ public class Player extends MovableEntity implements KeyListener {
         if (keyCode == KeyEvent.VK_W) {
             upPressed = false;
             if (downPressed)
-                setVelocityY(5);
+                setVelocityY(1);
             else
                 setVelocityY(0);
         } else if (keyCode == KeyEvent.VK_S) {
             downPressed = false;
             if (upPressed)
-                setVelocityY(-5);
+                setVelocityY(-1);
             else
                 setVelocityY(0);
         } else if (keyCode == KeyEvent.VK_A) {
             leftPressed = false;
             if (rightPressed)
-                setVelocityX(5);
+                setVelocityX(1);
             else
                 setVelocityX(0);
         } else if (keyCode == KeyEvent.VK_D) {
             rightPressed = false;
             if (leftPressed)
-                setVelocityX(-5);
+                setVelocityX(-1);
             else
                 setVelocityX(0);
         }
@@ -171,16 +152,16 @@ public class Player extends MovableEntity implements KeyListener {
         int dy = 0;
 
         if (upPressed) {
-            dy -= 10;
+            dy -= ConfigEntity.playerSpeed;
         }
         if (downPressed) {
-            dy += 10;
+            dy += ConfigEntity.playerSpeed;
         }
         if (leftPressed) {
-            dx -= 10;
+            dx -= ConfigEntity.playerSpeed;
         }
         if (rightPressed) {
-            dx += 10;
+            dx += ConfigEntity.playerSpeed;
         }
 
         if ((upPressed || downPressed) && (leftPressed || rightPressed)) {
@@ -188,7 +169,15 @@ public class Player extends MovableEntity implements KeyListener {
             dy = (int) (dy * 0.7);
         }
 
-        if (!checkCollisionWithWalls(dx, dy)) {
+
+
+        /*or (StaticEntity entity : ConfigCore.staticEntities) {
+            if (isCollidingWith(entity)) {
+                move(dx, dy);
+            }
+        }*/
+
+        if (!checkCollision(dx, dy)) {
             move(dx, dy);
             updateAnimationFrame();
         }
@@ -220,4 +209,15 @@ public class Player extends MovableEntity implements KeyListener {
     public void setVelocityY(int velocityY) {
         this.velocityY = velocityY;
     }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
 }

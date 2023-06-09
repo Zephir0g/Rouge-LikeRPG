@@ -34,7 +34,6 @@ public class Wall extends StaticEntity{
 
     @Override
     public void draw(Graphics g) {
-        // TODO Реализация отрисовки игрока (ассетами)
         g.drawImage(texture, x, y, width, height, null);
 
         int textureWidth = texture.getWidth(null);

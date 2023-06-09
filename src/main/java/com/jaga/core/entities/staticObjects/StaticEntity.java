@@ -12,14 +12,21 @@ public abstract class StaticEntity extends BasicEntity {
 
     @Override
     public void draw(Graphics g) {
-        // TODO Реализация отрисовки объектов
     }
 
+    public boolean isCollidingWith(Player player) {
+        // Объекты пересекаются, есть столкновение
+        return player.getX() < getX() + getWidth() &&
+                player.getX() + player.getWidth() > getX() &&
+                player.getY() < getY() + getHeight() &&
+                player.getY() + player.getHeight() > getY();
+    }
 
     @Override
     public void setX(int x) {
         super.setX(x);
     }
+
 
     @Override
     public void setY(int y) {

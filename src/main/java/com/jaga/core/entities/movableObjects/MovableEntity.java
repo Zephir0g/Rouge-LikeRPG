@@ -17,6 +17,5 @@ public abstract class MovableEntity extends BasicEntity {
 
     @Override
     public void draw(Graphics g) {
-        // TODO Realization of drawing movable entity
     }
 }

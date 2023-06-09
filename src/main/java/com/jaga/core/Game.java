@@ -120,9 +120,11 @@ public class Game {
         renderer.addEntity(player); // Add player to renderer
         frame.addKeyListener(player); // Add player to keyListener
         renderer.addEntity(fps);    // Add fps meter to renderer
+        log.log(Level.INFO, "Static entities: " + ConfigCore.staticEntities.size());
     }
 
     private void generateObstacles (int numObstacles) {
+        //TODO: rewrite this method in Obstacles class, do it like in BasicField class
         Random random = new Random();
         List<Obstacles> obstacles = new ArrayList<>();
 
@@ -141,6 +143,7 @@ public class Game {
         }
         // Adding obstacles to ConfigCore
         ConfigCore.obstacles = obstacles;
+        ConfigCore.staticEntities.addAll(obstacles);
 
     }
     public static void switchPlayerByHashName(String hashName) {

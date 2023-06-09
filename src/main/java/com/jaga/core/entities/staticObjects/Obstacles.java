@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import static com.jaga.config.ConfigCore.height;
 import static com.jaga.config.ConfigCore.width;
 
-public class Obstacles extends BasicEntity{
+public class Obstacles extends StaticEntity {
 
     private static EntityRenderer renderer;
     private Image texture;
