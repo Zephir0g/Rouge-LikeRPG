@@ -12,6 +12,7 @@ import com.jaga.game.entities.objects.staticObjects.Obstacles;
 import com.jaga.core.entities.staticObjects.StaticEntity;
 import com.jaga.core.entities.staticObjects.initEntities.BasicField;
 import com.jaga.keyListener.GameKeyListener;
+import com.jaga.windows.MainMenu;
 import com.jaga.windows.TerminalGame;
 import org.jline.console.impl.Builtins;
 

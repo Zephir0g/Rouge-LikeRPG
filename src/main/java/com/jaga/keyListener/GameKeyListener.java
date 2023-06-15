@@ -1,12 +1,14 @@
 package com.jaga.keyListener;
 
 import com.jaga.game.Game;
+import com.jaga.windows.MainMenu;
 import com.jaga.windows.TerminalGame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.logging.Level;
 
 public class GameKeyListener {
@@ -48,6 +50,11 @@ public class GameKeyListener {
                     // Thread safe to pause game
                     if (SwingUtilities.isEventDispatchThread()) {
                         Game.togglePause();
+                        /*try {
+                            MainMenu mainMenu = new MainMenu();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }*/
                     } else {
                         SwingUtilities.invokeLater(Game::togglePause);
                     }
