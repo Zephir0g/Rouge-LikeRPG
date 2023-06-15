@@ -3,7 +3,7 @@ package com.jaga.core.entities.staticObjects.initEntities;
 import com.jaga.core.config.ConfigCore;
 import com.jaga.core.config.ConfigEntity;
 import com.jaga.game.Game;
-import com.jaga.core.entities.staticObjects.Wall;
+import com.jaga.game.entities.objects.staticObjects.Wall;
 
 
 import java.util.ArrayList;

@@ -1,7 +1,8 @@
-package com.jaga.core.entities.movableObjects;
+package com.jaga.game.entities;
 
 import com.jaga.core.config.ConfigCore;
 import com.jaga.core.config.ConfigEntity;
+import com.jaga.core.entities.movableObjects.MovableEntity;
 import com.jaga.game.Game;
 import com.jaga.core.entities.staticObjects.StaticEntity;
 

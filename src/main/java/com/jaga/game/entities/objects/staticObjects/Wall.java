@@ -1,6 +1,7 @@
-package com.jaga.core.entities.staticObjects;
+package com.jaga.game.entities.objects.staticObjects;
 
 import com.jaga.core.config.ConfigEntity;
+import com.jaga.core.entities.staticObjects.StaticEntity;
 import com.jaga.game.Game;
 
 import javax.imageio.ImageIO;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
 
-public class Wall extends StaticEntity{
+public class Wall extends StaticEntity {
     private Image texture;
 
 

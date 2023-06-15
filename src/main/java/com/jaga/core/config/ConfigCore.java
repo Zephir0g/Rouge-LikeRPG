@@ -1,8 +1,8 @@
 package com.jaga.core.config;
 
-import com.jaga.core.entities.staticObjects.Obstacles;
+import com.jaga.game.entities.objects.staticObjects.Obstacles;
 import com.jaga.core.entities.staticObjects.StaticEntity;
-import com.jaga.core.entities.staticObjects.Wall;
+import com.jaga.game.entities.objects.staticObjects.Wall;
 
 import java.util.ArrayList;
 import java.util.List;

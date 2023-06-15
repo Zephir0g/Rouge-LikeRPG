@@ -1,8 +1,10 @@
-package com.jaga.core.entities.staticObjects;
+package com.jaga.game.entities.objects.staticObjects;
+
+import com.jaga.core.entities.staticObjects.StaticEntity;
 
 import java.awt.*;
 
-public class FPSMeter extends StaticEntity{
+public class FPSMeter extends StaticEntity {
     private int frameCount;
     private long lastTime;
     double fps;

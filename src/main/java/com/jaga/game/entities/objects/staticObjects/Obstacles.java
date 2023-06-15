@@ -1,5 +1,6 @@
-package com.jaga.core.entities.staticObjects;
+package com.jaga.game.entities.objects.staticObjects;
 import com.jaga.core.config.ConfigEntity;
+import com.jaga.core.entities.staticObjects.StaticEntity;
 import com.jaga.game.Game;
 
 import javax.imageio.ImageIO;

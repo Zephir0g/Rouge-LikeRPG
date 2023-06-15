@@ -3,7 +3,7 @@ package com.jaga.game.commands.playerCommand.create;
 import com.jaga.core.config.ConfigCore;
 import com.jaga.core.config.ConfigEntity;
 import com.jaga.game.Game;
-import com.jaga.core.entities.movableObjects.Player;
+import com.jaga.game.entities.Player;
 
 import java.util.logging.Level;
 
