@@ -1,6 +1,7 @@
 package com.jaga.windows;
 
 import com.jaga.core.config.ConfigEntity;
+import com.jaga.game.Game;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class MainMenu extends JFrame {
 //    ImageIcon image = new ImageIcon(icon.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 
     public MainMenu() throws IOException {
-
+        ResourceBundle bundle = ResourceBundle.getBundle("language");
         // Установка размеров и положения окна в полноэкранный режим
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -52,11 +53,27 @@ public class MainMenu extends JFrame {
         gbc.insets = new Insets(25, 0, 25, 0); // Отступы кнопок
 
         // Создание и добавление кнопок
-        JButton playButton = new JButton("Play");
-        JButton continueButton = new JButton("Continue");
-        JButton saveButton = new JButton("Save");
-        JButton settingsButton = new JButton("Settings");
-        JButton exitButton = new JButton("Exit");
+        JButton playButton = new JButton(bundle.getString("buttonPlay"));
+        JButton continueButton = new JButton(bundle.getString("buttonContinue"));
+        JButton saveButton = new JButton(bundle.getString("buttonSaves"));
+        JButton settingsButton = new JButton(bundle.getString("buttonSettings"));
+        JButton exitButton = new JButton(bundle.getString("buttonExit"));
+
+        playButton.addActionListener(e -> {
+            try {
+                new Game();
+            } catch (Exception ex) {
+                ex.getStackTrace();
+            }
+            dispose();
+        });
+        continueButton.addActionListener(e -> {
+        });
+        saveButton.addActionListener(e -> {
+        });
+        settingsButton.addActionListener(e -> {
+        });
+        exitButton.addActionListener(e -> System.exit(0));
 
         gbc.gridx = 0;
         gbc.gridy = 0;
