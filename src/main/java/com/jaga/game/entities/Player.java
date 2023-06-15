@@ -27,6 +27,8 @@ public class Player extends MovableEntity implements KeyListener {
     private boolean downPressed = false;
     private boolean leftPressed = false;
     private boolean rightPressed = false;
+    private int frameDelay = 100;
+    private long lastFrameTime = System.currentTimeMillis();
 
     public Player(int x, int y, int width, int height) {
         super(x, y, width, height);
@@ -177,13 +179,17 @@ public class Player extends MovableEntity implements KeyListener {
     }
 
     private void updateAnimationFrame() {
-        if (upPressed || downPressed || leftPressed || rightPressed) {
-            currentFrame++;
-            if (currentFrame >= animationFrames.length) {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastFrameTime >= frameDelay) {
+            if (upPressed || downPressed || leftPressed || rightPressed) {
+                currentFrame++;
+                if (currentFrame >= animationFrames.length) {
+                    currentFrame = 0;
+                }
+            } else {
                 currentFrame = 0;
             }
-        } else {
-            currentFrame = 0;
+            lastFrameTime = currentTime;
         }
     }
 
