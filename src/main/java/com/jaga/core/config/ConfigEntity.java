@@ -9,6 +9,8 @@ public class ConfigEntity {
     public static final int playerHeight = 120;
     public static final int playerSpeed = 5;
     public static final String defaultPlayerTexture = "/assets/animations/testanim1.png";
+    public static final String MenuImage = "/assets/animations/CItyAnim.gif";
+    public static final String MainMenuTopBottomTextures = "/assets/animations/top_bottom_art.jpg";
 
     // Wall entity
     public static final int wallWidth = 100;

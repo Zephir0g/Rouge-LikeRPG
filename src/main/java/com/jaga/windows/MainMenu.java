@@ -23,19 +23,19 @@ public class MainMenu extends JFrame {
         setLayout(new BorderLayout());
 
         // Верхнее изображение
-        BufferedImage topImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.defaultPlayerTexture)));
+        BufferedImage topImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.MainMenuTopBottomTextures))); // set image on top
         ImagePanel topImagePanel = new ImagePanel(topImage);
         topImagePanel.setPreferredSize(new Dimension(getWidth(), getHeight() / 10));
         add(topImagePanel, BorderLayout.NORTH);
 
         // Нижнее изображение
-        BufferedImage bottomImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.defaultPlayerTexture)));
+        BufferedImage bottomImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.MainMenuTopBottomTextures))); // set image on bottom
         ImagePanel bottomImagePanel = new ImagePanel(bottomImage);
         bottomImagePanel.setPreferredSize(new Dimension(getWidth(), getHeight() / 10));
         add(bottomImagePanel, BorderLayout.SOUTH);
 
         // Пользовательская панель с фоновым изображением для кнопок
-        BufferedImage backgroundImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.defaultPlayerTexture)));
+        BufferedImage backgroundImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.MenuImage))); // set image on buttons
         JPanel buttonPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -50,11 +50,11 @@ public class MainMenu extends JFrame {
         gbc.insets = new Insets(25, 0, 25, 0); // Отступы кнопок
 
         // Создание и добавление кнопок
-        JButton playButton = new JButton("Играть");
-        JButton continueButton = new JButton("Продолжить");
-        JButton saveButton = new JButton("Сохранения");
-        JButton settingsButton = new JButton("Настройки");
-        JButton exitButton = new JButton("Выход");
+        JButton playButton = new JButton("Play");
+        JButton continueButton = new JButton("Continue");
+        JButton saveButton = new JButton("Save");
+        JButton settingsButton = new JButton("Settings");
+        JButton exitButton = new JButton("Exit");
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -96,4 +96,5 @@ public class MainMenu extends JFrame {
             g.drawImage(image, x, y, width, height, null);
         }
     }
+
 }
