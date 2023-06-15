@@ -8,12 +8,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class MainMenu extends JFrame {
 //    Image icon = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(ConfigEntity.defaultPlayerTexture)));
 //    ImageIcon image = new ImageIcon(icon.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 
     public MainMenu() throws IOException {
+
         // Установка размеров и положения окна в полноэкранный режим
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
