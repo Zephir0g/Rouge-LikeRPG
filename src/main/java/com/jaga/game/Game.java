@@ -4,6 +4,7 @@ import com.jaga.core.config.ConfigCore;
 import com.jaga.core.config.ConfigEntity;
 import com.jaga.core.config.ConfigLogger;
 import com.jaga.core.entities.BasicEntity;
+import com.jaga.game.commands.Commands;
 import com.jaga.game.entities.Player;
 import com.jaga.core.entities.render.EntityRenderer;
 import com.jaga.game.entities.objects.staticObjects.FPSMeter;
@@ -12,6 +13,7 @@ import com.jaga.core.entities.staticObjects.StaticEntity;
 import com.jaga.core.entities.staticObjects.initEntities.BasicField;
 import com.jaga.keyListener.GameKeyListener;
 import com.jaga.windows.TerminalGame;
+import org.jline.console.impl.Builtins;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +23,7 @@ import java.util.logging.Logger;
 import static com.jaga.core.config.ConfigCore.height;
 import static com.jaga.core.config.ConfigCore.width;
 
-public class Game {
+    public class Game {
 
     public static Logger log = Logger.getLogger(Game.class.getName());
 
@@ -35,7 +37,7 @@ public class Game {
     private static Obstacles obstacles;
     private FPSMeter fps;
     private TerminalGame terminal = new TerminalGame();
-    private static Player player, switchPlayer;
+    private static Player player;
     private static boolean isPaused = false;
     private static boolean isDevProfile = false;
     // private Terminal terminal = new Terminal();
