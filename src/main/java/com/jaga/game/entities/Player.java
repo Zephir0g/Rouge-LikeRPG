@@ -66,25 +66,20 @@ public class Player extends MovableEntity implements KeyListener {
 
 
     private boolean isCollidingWith(StaticEntity entity) {
-        if (getX() < getX() + getWidth() &&
-                getX() + getWidth() > getX() &&
-                getY() < getY() + getHeight() &&
-                getY() + getHeight() > getY()) {
-            // Objects colliding
-            return true;
-        }
-        return false; // change this for other collision logic
+        Rectangle entityRect = new Rectangle(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
+        Rectangle playerRect = new Rectangle(getX(), getY(), getWidth(), getHeight());
+
+        return entityRect.intersects(playerRect);
     }
 
     public boolean checkCollision(int dx, int dy) {
-        //TODO fix collision detection, when player collides with wall, it gets stuck
-        List<StaticEntity> staticEntitys = ConfigCore.staticEntities;
-        Rectangle playerRect = new Rectangle(x + dx, y + dy, width, height);
+        List<StaticEntity> staticEntities = ConfigCore.staticEntities;
+        Rectangle playerRect = new Rectangle(getX() + dx, getY() + dy, getWidth(), getHeight());
 
-        for (StaticEntity staticEntity : staticEntitys) {
+        for (StaticEntity staticEntity : staticEntities) {
             Rectangle wallRect = new Rectangle(staticEntity.getX(), staticEntity.getY(), staticEntity.getWidth(), staticEntity.getHeight());
 
-            if (staticEntity.isCollidingWith(this)) {
+            if (playerRect.intersects(wallRect)) {
                 return true;
             }
         }
@@ -170,17 +165,14 @@ public class Player extends MovableEntity implements KeyListener {
             dy = (int) (dy * 0.7);
         }
 
-
-
-        /*or (StaticEntity entity : ConfigCore.staticEntities) {
-            if (isCollidingWith(entity)) {
-                move(dx, dy);
-            }
-        }*/
-
         if (!checkCollision(dx, dy)) {
             move(dx, dy);
             updateAnimationFrame();
+        } else {
+            // Handle collision here
+            // For example, stop the movement of the player
+            setVelocityX(0);
+            setVelocityY(0);
         }
     }
 
