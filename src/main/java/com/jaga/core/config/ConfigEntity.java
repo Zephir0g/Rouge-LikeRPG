@@ -1,4 +1,4 @@
-package com.jaga.config;
+package com.jaga.core.config;
 
 // Configuration for game entities
 public class ConfigEntity {

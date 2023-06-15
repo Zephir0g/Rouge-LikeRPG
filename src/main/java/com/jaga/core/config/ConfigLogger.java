@@ -1,12 +1,10 @@
-package com.jaga.config;
+package com.jaga.core.config;
 
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
-
-import static com.jaga.core.Game.log;
 
 public class ConfigLogger {
 

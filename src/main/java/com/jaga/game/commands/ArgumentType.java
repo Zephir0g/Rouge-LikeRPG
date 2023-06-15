@@ -1,4 +1,4 @@
-package com.jaga.core.commands;
+package com.jaga.game.commands;
 
 public class ArgumentType {
     private final String name;

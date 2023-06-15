@@ -1,9 +1,9 @@
-package com.jaga.core.commands;
+package com.jaga.game.commands;
 
-import com.jaga.core.Game;
-import com.jaga.core.commands.global.EntityListCommandExecutor;
-import com.jaga.core.commands.global.HelpCommandExecutor;
-import com.jaga.core.commands.playerCommand.PlayerCommandHub;
+import com.jaga.game.Game;
+import com.jaga.game.commands.global.EntityListCommandExecutor;
+import com.jaga.game.commands.global.HelpCommandExecutor;
+import com.jaga.game.commands.playerCommand.PlayerCommandHub;
 import com.jaga.windows.TerminalGame;
 
 import java.util.Arrays;

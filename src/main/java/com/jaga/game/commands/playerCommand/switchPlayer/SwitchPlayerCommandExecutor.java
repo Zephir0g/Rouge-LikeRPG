@@ -1,6 +1,6 @@
-package com.jaga.core.commands.playerCommand.switchPlayer;
+package com.jaga.game.commands.playerCommand.switchPlayer;
 
-import com.jaga.core.Game;
+import com.jaga.game.Game;
 import com.jaga.windows.TerminalGame;
 
 public class SwitchPlayerCommandExecutor {

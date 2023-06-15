@@ -1,6 +1,6 @@
 package com.jaga;
 
-import com.jaga.core.Game;
+import com.jaga.game.Game;
 
 public class Main {
     public static void main(String[] args) {

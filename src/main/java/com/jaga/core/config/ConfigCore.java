@@ -1,4 +1,4 @@
-package com.jaga.config;
+package com.jaga.core.config;
 
 import com.jaga.core.entities.staticObjects.Obstacles;
 import com.jaga.core.entities.staticObjects.StaticEntity;

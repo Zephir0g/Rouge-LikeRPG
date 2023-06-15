@@ -1,8 +1,8 @@
 package com.jaga.windows;
 
-import com.jaga.config.ConfigLogger;
-import com.jaga.core.Game;
-import com.jaga.core.commands.CommandHub;
+import com.jaga.core.config.ConfigLogger;
+import com.jaga.game.Game;
+import com.jaga.game.commands.CommandHub;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.SyntaxScheme;

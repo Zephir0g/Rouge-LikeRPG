@@ -1,6 +1,5 @@
-package com.jaga.core.commands.global;
+package com.jaga.game.commands.global;
 
-import com.jaga.core.entities.BasicEntity;
 import com.jaga.core.entities.render.EntityRenderer;
 import com.jaga.windows.TerminalGame;
 

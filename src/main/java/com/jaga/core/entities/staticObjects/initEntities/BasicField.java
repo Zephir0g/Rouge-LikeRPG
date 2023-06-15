@@ -1,15 +1,14 @@
-package com.jaga.core.entities.staticObjects.gameField;
+package com.jaga.core.entities.staticObjects.initEntities;
 
-import com.jaga.config.ConfigCore;
-import com.jaga.config.ConfigEntity;
-import com.jaga.core.Game;
+import com.jaga.core.config.ConfigCore;
+import com.jaga.core.config.ConfigEntity;
+import com.jaga.game.Game;
 import com.jaga.core.entities.staticObjects.Wall;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BasicField {
 

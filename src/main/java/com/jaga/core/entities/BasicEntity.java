@@ -19,6 +19,9 @@ public abstract class BasicEntity {
         createHashName();
     }
 
+    public BasicEntity() {
+    }
+
     public abstract void draw(Graphics g); // Method to draw the entity on the screen
 
     public void createHashName(){

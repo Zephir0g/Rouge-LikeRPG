@@ -1,12 +1,11 @@
-package com.jaga.core.commands.global;
+package com.jaga.game.commands.global;
 
-import com.jaga.core.commands.Commands;
-import com.jaga.core.commands.playerCommand.PlayerCommands;
+import com.jaga.game.commands.Commands;
+import com.jaga.game.commands.playerCommand.PlayerCommands;
 import com.jaga.windows.TerminalGame;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 public class HelpCommandExecutor {
     public HelpCommandExecutor(Commands enumInstance) {

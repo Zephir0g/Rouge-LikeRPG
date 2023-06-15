@@ -1,8 +1,8 @@
 package com.jaga.core.entities.movableObjects;
 
-import com.jaga.config.ConfigCore;
-import com.jaga.config.ConfigEntity;
-import com.jaga.core.Game;
+import com.jaga.core.config.ConfigCore;
+import com.jaga.core.config.ConfigEntity;
+import com.jaga.game.Game;
 import com.jaga.core.entities.staticObjects.StaticEntity;
 
 import javax.imageio.ImageIO;

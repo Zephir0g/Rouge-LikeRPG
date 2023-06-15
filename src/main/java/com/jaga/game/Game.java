@@ -1,29 +1,25 @@
-package com.jaga.core;
+package com.jaga.game;
 
-import com.jaga.config.ConfigCore;
-import com.jaga.config.ConfigEntity;
-import com.jaga.config.ConfigLogger;
+import com.jaga.core.config.ConfigCore;
+import com.jaga.core.config.ConfigEntity;
+import com.jaga.core.config.ConfigLogger;
 import com.jaga.core.entities.BasicEntity;
 import com.jaga.core.entities.movableObjects.Player;
 import com.jaga.core.entities.render.EntityRenderer;
 import com.jaga.core.entities.staticObjects.FPSMeter;
 import com.jaga.core.entities.staticObjects.Obstacles;
 import com.jaga.core.entities.staticObjects.StaticEntity;
-import com.jaga.core.entities.staticObjects.Wall;
-import com.jaga.core.entities.staticObjects.gameField.BasicField;
+import com.jaga.core.entities.staticObjects.initEntities.BasicField;
 import com.jaga.keyListener.GameKeyListener;
 import com.jaga.windows.TerminalGame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jaga.config.ConfigCore.height;
-import static com.jaga.config.ConfigCore.width;
+import static com.jaga.core.config.ConfigCore.height;
+import static com.jaga.core.config.ConfigCore.width;
 
 public class Game {
 
@@ -36,6 +32,7 @@ public class Game {
 
     private static GraphicsDevice device;
     private static Timer updateTimer;
+    private static Obstacles obstacles;
     private FPSMeter fps;
     private TerminalGame terminal = new TerminalGame();
     private static Player player, switchPlayer;
@@ -107,7 +104,6 @@ public class Game {
 
     private void initEntities() {
         player = new Player(width / 2 - 60, height / 2 - 60, ConfigEntity.playerWidth, ConfigEntity.playerHeight);
-
         //renderer.addEntity(wall);
         BasicField basicField = new BasicField();
         fps = new FPSMeter(10, 10, 10, 10);
@@ -115,37 +111,15 @@ public class Game {
         for (StaticEntity wall : ConfigCore.staticEntities) {
             renderer.addEntity(wall);
         }
+//        InitObstacles initObstacles = new InitObstacles();
 
-        generateObstacles(5); // Generate n obstacles
         renderer.addEntity(player); // Add player to renderer
         frame.addKeyListener(player); // Add player to keyListener
         renderer.addEntity(fps);    // Add fps meter to renderer
         log.log(Level.INFO, "Static entities: " + ConfigCore.staticEntities.size());
     }
 
-    private void generateObstacles (int numObstacles) {
-        //TODO: rewrite this method in Obstacles class, do it like in BasicField class
-        Random random = new Random();
-        List<Obstacles> obstacles = new ArrayList<>();
 
-        for (int i = 0; i < numObstacles; i++) {
-            // Generating random coordinates and size of obstacle
-            int obstacleX = random.nextInt(width - ConfigEntity.obstacleWidth);
-            int obstacleY = random.nextInt(height - ConfigEntity.obstacleHeight);
-            int obstacleWidth = ConfigEntity.obstacleWidth;
-            int obstacleHeight = ConfigEntity.obstacleHeight;
-
-            // Creating obstacle and adding it to renderer and obstacles list
-            Obstacles obstacle = new Obstacles(obstacleX, obstacleY, obstacleWidth, obstacleHeight);
-            obstacles.add(obstacle);
-            renderer.addEntity(obstacle);
-
-        }
-        // Adding obstacles to ConfigCore
-        ConfigCore.obstacles = obstacles;
-        ConfigCore.staticEntities.addAll(obstacles);
-
-    }
     public static void switchPlayerByHashName(String hashName) {
         Player newPlayer = (Player) EntityRenderer.getEntitiesMap().get(hashName);
         if (newPlayer != null) {

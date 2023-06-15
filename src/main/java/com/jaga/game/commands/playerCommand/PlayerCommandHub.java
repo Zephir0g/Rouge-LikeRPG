@@ -1,8 +1,8 @@
-package com.jaga.core.commands.playerCommand;
+package com.jaga.game.commands.playerCommand;
 
-import com.jaga.core.commands.global.HelpCommandExecutor;
-import com.jaga.core.commands.playerCommand.create.CreateCommandExecutor;
-import com.jaga.core.commands.playerCommand.switchPlayer.SwitchPlayerCommandExecutor;
+import com.jaga.game.commands.global.HelpCommandExecutor;
+import com.jaga.game.commands.playerCommand.create.CreateCommandExecutor;
+import com.jaga.game.commands.playerCommand.switchPlayer.SwitchPlayerCommandExecutor;
 import com.jaga.windows.TerminalGame;
 
 import java.util.Arrays;

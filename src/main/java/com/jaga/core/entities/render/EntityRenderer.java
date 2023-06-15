@@ -1,13 +1,11 @@
 package com.jaga.core.entities.render;
 
-import com.jaga.core.Game;
+import com.jaga.game.Game;
 import com.jaga.core.entities.BasicEntity;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 
 public class EntityRenderer extends JPanel {

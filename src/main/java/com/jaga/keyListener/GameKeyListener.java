@@ -1,6 +1,6 @@
 package com.jaga.keyListener;
 
-import com.jaga.core.Game;
+import com.jaga.game.Game;
 import com.jaga.windows.TerminalGame;
 
 import javax.swing.*;

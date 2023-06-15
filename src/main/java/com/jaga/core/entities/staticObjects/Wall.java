@@ -1,12 +1,11 @@
 package com.jaga.core.entities.staticObjects;
 
-import com.jaga.config.ConfigEntity;
-import com.jaga.core.Game;
+import com.jaga.core.config.ConfigEntity;
+import com.jaga.game.Game;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Objects;
 import java.util.logging.Level;
 

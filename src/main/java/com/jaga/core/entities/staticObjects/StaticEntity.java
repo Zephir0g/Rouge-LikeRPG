@@ -10,6 +10,9 @@ public abstract class StaticEntity extends BasicEntity {
         super(x, y, width, height);
     }
 
+    public StaticEntity() {
+    }
+
     @Override
     public void draw(Graphics g) {
     }

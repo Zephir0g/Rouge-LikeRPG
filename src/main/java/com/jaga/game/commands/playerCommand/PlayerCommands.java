@@ -1,23 +1,18 @@
-package com.jaga.core.commands;
+package com.jaga.game.commands.playerCommand;
 
-import com.jaga.core.commands.playerCommand.PlayerCommands;
+import com.jaga.game.commands.ArgumentType;
 
-public enum Commands {
-
-    HELP("/help"),
-    PAUSE("/pause"),
-    UNPAUSE("/unpause"),
-    ENTITYLIST("/entityList"),
-    PLAYER("/player",
-            new ArgumentType(PlayerCommands.CREATE.getCommandName()), new ArgumentType(PlayerCommands.SWITCH.getCommandName()),
-            new ArgumentType(PlayerCommands.HELP.getCommandName()));
-    // Добавьте другие команды, которые вам нужны
+public enum PlayerCommands {
+    CREATE("create"),
+    HELP("help"),
+    SWITCH("switch", new ArgumentType("player code")),;
+    // Добавьте другие команды, которые вам нужqны
 
     // Конструкторы для каждой команды
     private final String commandName;
     private final ArgumentType[] argumentTypes;
 
-    Commands(String commandName, ArgumentType... argumentTypes) {
+    PlayerCommands(String commandName, ArgumentType... argumentTypes) {
         this.commandName = commandName;
         this.argumentTypes = argumentTypes;
     }
@@ -48,9 +43,8 @@ public enum Commands {
         return argumentTypes;
     }
 
-    public static Commands findCommand(String commandName) {
-        String commandNameNew = commandName.replace("/", "");
-        for (Commands command : Commands.values()) {
+    public static PlayerCommands findCommand(String commandName) {
+        for (PlayerCommands command : PlayerCommands.values()) {
             if (command.getCommandNameWithoutArgs().equalsIgnoreCase(commandName)) {
                 return command;
             }
