@@ -10,7 +10,7 @@ public class GameWindow {
     public GameWindow() {
         JFrame window = new JFrame(Config.GAME_NAME);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
+        window.setResizable(true);
 
         gamePanel = new GamePanel();
         gamePanel.startGame();

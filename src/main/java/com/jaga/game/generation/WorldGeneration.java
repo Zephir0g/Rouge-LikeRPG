@@ -14,11 +14,16 @@ public class WorldGeneration {
 
     private GamePanel gamePanel;
     private Tile[] tile;
+    private Tile[][] tileMap;
+    private boolean worldGenerated;
 
     public WorldGeneration(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tile = new Tile[3];
+        tileMap = new Tile[Config.MAX_SCREEN_ROW][Config.MAX_SCREEN_COLUMN];
         getTileImage();
+
+        worldGenerated = true;
     }
 
     public void getTileImage() {
@@ -35,20 +40,39 @@ public class WorldGeneration {
     }
 
     public void generateWorld(Graphics2D g2) {
-        Random random = new Random();
+        if (worldGenerated) {
+            Random random = new Random();
 
-        for (int row = 0; row < Config.MAX_SCREEN_ROW; row++) {
-            for (int col = 0; col < Config.MAX_SCREEN_COLUMN; col++) {
-                int tileIndex = random.nextInt(tile.length);
-                Tile selectedTile = tile[tileIndex];
-                drawTile(g2, tileIndex, col, row);
+            int tileMapRow = tileMap.length;
+            int tileMapColumn = tileMap[0].length;
+
+            for (int row = 0; row < tileMapRow; row++) {
+                for (int col = 0; col < tileMapColumn; col++) {
+                    int tileIndex = random.nextInt(tile.length);
+                    tileMap[row][col] = tile[tileIndex];
+                }
+            }
+            worldGenerated = false;
+        }
+    }
+
+    public void drawTile(Graphics2D g2) {
+        for (int row = 0; row < tileMap.length; row++) {
+            for (int col = 0; col < tileMap[row].length; col++) {
+                int tileIndex = getTileIndex(tileMap[row][col]);
+                int x = col * Config.TILE_SIZE;
+                int y = row * Config.TILE_SIZE;
+                g2.drawImage(tile[tileIndex].image, x, y, Config.TILE_SIZE, Config.TILE_SIZE, null);
             }
         }
     }
 
-    private void drawTile(Graphics2D g2, int tileIndex, int col, int row) {
-        int x = col * Config.TILE_SIZE;
-        int y = row * Config.TILE_SIZE;
-        g2.drawImage(tile[tileIndex].image, x, y, Config.TILE_SIZE, Config.TILE_SIZE, null);
+    private int getTileIndex(Tile tile) {
+        for (int i = 0; i < this.tile.length; i++) {
+            if (this.tile[i] == tile) {
+                return i;
+            }
+        }
+        return -1; // Tile not found
     }
 }
