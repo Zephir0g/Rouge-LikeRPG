@@ -54,8 +54,8 @@ public class ConfigLogger {
                 time = String.format(COLOR_BASE + "[%1$tF %1$tT]" + COLOR_RESET, record.getMillis());
                 separator = String.format(COLOR_BASE + " : " + COLOR_RESET);
 
-                return String.format(time + " %2$s %3$s " + separator + " %4$s%n",
-                        record.getMillis(), level, path, message);
+                return String.format(time + " %2$s" + separator + " %3$s%n",
+                        record.getMillis(), level, message);
             }
         };
     }

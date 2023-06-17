@@ -100,12 +100,11 @@ public class TerminalGame extends JFrame {
             try {
                 while (true) {
                     String line = lineReader.readLine(">> ");
-                    // Обработка введённой команды
+                    // Process the command entered by the user
                     processCommand(line);
                 }
             } catch (UserInterruptException e) {
-                // Обработка прерывания пользователем (например, нажатием Ctrl+C)
-
+                // Process the user interrupt (e.g. Ctrl+C)
                 System.exit(0);
             }
         });

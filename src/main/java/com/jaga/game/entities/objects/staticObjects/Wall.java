@@ -39,7 +39,7 @@ public class Wall extends StaticEntity {
         int textureWidth = texture.getWidth(null);
         int textureHeight = texture.getHeight(null);
 
-        // Рисуем текстуру с повторением внутри прямоугольника стены
+        // Draw texture with repetition inside the wall rectangle
         for (int tx = 0; tx < width; tx += textureWidth) {
             for (int ty = 0; ty < height; ty += textureHeight) {
                 int drawWidth = Math.min(textureWidth, width - tx);

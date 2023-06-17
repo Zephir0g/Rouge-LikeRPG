@@ -18,7 +18,7 @@ public abstract class StaticEntity extends BasicEntity {
     }
 
     public boolean isCollidingWith(Player player) {
-        // Объекты пересекаются, есть столкновение
+        // Objects intersect, there is a collision
         return player.getX() < getX() + getWidth() &&
                 player.getX() + player.getWidth() > getX() &&
                 player.getY() < getY() + getHeight() &&

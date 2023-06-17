@@ -67,13 +67,6 @@ public class Player extends MovableEntity implements KeyListener {
     }
 
 
-    private boolean isCollidingWith(StaticEntity entity) {
-        Rectangle entityRect = new Rectangle(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
-        Rectangle playerRect = new Rectangle(getX(), getY(), getWidth(), getHeight());
-
-        return entityRect.intersects(playerRect);
-    }
-
     public boolean checkCollision(int dx, int dy) {
         List<StaticEntity> staticEntities = ConfigCore.staticEntities;
         Rectangle playerRect = new Rectangle(getX() + dx, getY() + dy, getWidth(), getHeight());
