@@ -13,6 +13,7 @@ build/
 *.iws
 *.iml
 *.ipr
+saves/
 out/
 saves/
 !**/src/main/**/out/
