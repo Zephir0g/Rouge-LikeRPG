@@ -79,7 +79,8 @@ public class GamePanel extends JPanel implements Runnable {
         g2.drawString("FPS: " + fpsCounter.getFPS(), 10, 20);
 
         //tileManager.draw(g2);
-        worldGeneration.generateWorld(g2);
+        worldGeneration.generateWorld();
+        worldGeneration.saveWorld();
         worldGeneration.drawTile(g2);
 
         // Draw player

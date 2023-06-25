@@ -23,4 +23,8 @@ public class Config {
     public static double PLAYER_Y = 100;
     public static double PLAYER_SPEED = 3;
 
+    //WORLD SETTINGS
+    public static final String[] WORLD_MAP_TILE_NAME = {"grass.png", "water.png", "wall.png"};
+    public static final String WORLD_MAP_TILE_PATH = "/assets/entity/tile/";
+
 }
