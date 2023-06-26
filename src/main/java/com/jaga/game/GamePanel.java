@@ -80,7 +80,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         //tileManager.draw(g2);
         worldGeneration.generateWorld();
-        worldGeneration.saveWorld();
         worldGeneration.drawTile(g2);
 
         // Draw player
