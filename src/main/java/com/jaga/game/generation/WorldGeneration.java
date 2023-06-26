@@ -20,6 +20,7 @@ public class WorldGeneration {
     private GamePanel gamePanel;
     private Tile[][] tileMap;
     private final ArrayList<Tile> tileList = new ArrayList<>();
+    private String worldName;
 
     private boolean worldGenerated, worldSaved;
 
@@ -47,6 +48,7 @@ public class WorldGeneration {
     }
 
     public void generateWorld() {
+        worldName = "saves/world-" + getCurrentDate() + ".map";
         int tileMapRow = tileMap.length;
         int tileMapColumn = tileMap[0].length;
         if (worldGenerated) {
@@ -64,14 +66,17 @@ public class WorldGeneration {
             }
             worldGenerated = false;
         }
-        setWorldSaved(true);
+        if (!isWorldSaved()) {
+            setWorldSaved(true);
+        }
     }
 
     public void saveWorld(Tile tile) {
         //Save world map to file .map lite text
+        //Java write and by symbols:
+
         if (tileMap != null && !isWorldSaved()) {
-            File worldMapFile = new File("saves/world-" + getCurrentDate() + ".map");
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(worldMapFile, true))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(worldName, true))) {
                 writer.write(tile.toString() + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
