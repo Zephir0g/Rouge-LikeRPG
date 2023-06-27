@@ -1,6 +1,5 @@
-package com.jaga.windows;
+package com.jaga.windows.menu;
 
-import com.jaga.game.GamePanel;
 import com.jaga.game.GameWindow;
 
 import javax.imageio.ImageIO;
@@ -19,6 +18,7 @@ public class Menu extends JFrame {
 
     private BufferedImage backgroundImage;
     private JPanel buttonPanel;
+    private SavesPanel savesPanel;
 
     public Menu() {
         setTitle("Background Image Window");
@@ -40,6 +40,8 @@ public class Menu extends JFrame {
         });
 
         buttonPanel = new JPanel(new GridBagLayout());
+
+        savesPanel = new SavesPanel(this);
 
         createButtons();
 
@@ -79,7 +81,7 @@ public class Menu extends JFrame {
                 backgroundImage = null;
 
                 // show saves panel
-                savesPanel();
+                showSavesPanel();
             }
         });
         JButton settingsButton = createButton("Settings");
@@ -92,6 +94,7 @@ public class Menu extends JFrame {
         buttonPanel.add(settingsButton, gbc);
     }
 
+
     private JButton createButton(String text) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(120, 30));
@@ -102,6 +105,26 @@ public class Menu extends JFrame {
     private void revalidateButtons() {
         buttonPanel.revalidate();
         buttonPanel.repaint();
+    }
+
+    private void showSavesPanel() {
+        buttonPanel.setVisible(false);
+        backgroundImage = null;
+
+        getContentPane().removeAll();
+        getContentPane().add(savesPanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    public void showMenu() {
+        savesPanel.setVisible(false);
+        getContentPane().removeAll();
+        getContentPane().add(buttonPanel, BorderLayout.CENTER);
+        backgroundImage = loadImage("/assets/windows/v1.png");
+        buttonPanel.setVisible(true);
+        revalidate();
+        repaint();
     }
 
     private BufferedImage loadImage(String imagePath) {
@@ -176,26 +199,6 @@ public class Menu extends JFrame {
         SwingUtilities.invokeLater(() -> {
             Menu window = new Menu();
             window.setVisible(true);
-        });
-    }
-}
-
-class SavesPanel extends JPanel {
-    public SavesPanel() {
-
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Saves");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            SavesPanel savesPanel = new SavesPanel();
-            frame.getContentPane().add(savesPanel);
-
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
         });
     }
 }
