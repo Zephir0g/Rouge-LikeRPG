@@ -48,7 +48,18 @@ public class WorldGeneration {
     }
 
     public void generateWorld() {
-        worldName = "saves/world-" + getCurrentDate() + ".map";
+        //TODO create world generation algorithm
+
+        if (!worldSaved) {
+
+            File savesFolder = new File("saves");
+            File worldFolder = new File("saves/world-" + getCurrentDate());
+            savesFolder.mkdirs();
+            worldFolder.mkdirs();
+
+            worldName = "saves/" + worldFolder.getName() + "/world.map";
+        }
+
         int tileMapRow = tileMap.length;
         int tileMapColumn = tileMap[0].length;
         if (worldGenerated) {
