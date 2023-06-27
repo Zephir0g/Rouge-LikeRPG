@@ -55,6 +55,17 @@ public class Menu extends JFrame {
         JButton newGameButton = createButton("New Game");
         JButton continueButton = createButton("Continue");
         JButton savesButton = createButton("Saves");
+        savesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // hide current panel and image background
+                buttonPanel.setVisible(false);
+                backgroundImage = null;
+
+                // show saves panel
+                savesPanel();
+            }
+        });
         JButton settingsButton = createButton("Settings");
 
 
@@ -68,11 +79,7 @@ public class Menu extends JFrame {
     private JButton createButton(String text) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(120, 30));
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+
         return button;
     }
 
@@ -90,6 +97,50 @@ public class Menu extends JFrame {
         return null;
     }
 
+    private void savesPanel(){
+        setLayout(new BorderLayout());
+
+        // Create panel with scroll bar
+        JPanel savesContentPanel = new JPanel();
+        savesContentPanel.setLayout(new BoxLayout(savesContentPanel, BoxLayout.Y_AXIS));
+
+        // Add saves (example)
+        for (int i = 1; i <= 10; i++) {
+            JLabel saveLabel = new JLabel("Save " + i);
+            savesContentPanel.add(saveLabel);
+        }
+
+        // Create vertical scroll bar
+        JScrollPane scrollPane = new JScrollPane(savesContentPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        // Add scroll panel to the main panel
+        add(scrollPane, BorderLayout.CENTER);
+
+        // Create "Back" button with bottom padding
+        JButton backButton = new JButton("Back");
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backButton.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // hide current panel
+                savesContentPanel.setVisible(false);
+                backButton.setVisible(false);
+
+
+                // show main panel
+                backgroundImage = loadImage("/assets/windows/v1.png");
+                buttonPanel.setVisible(true);
+                repaint();
+
+            }
+        });
+
+        // Add "Back" button to the main panel
+        add(backButton, BorderLayout.PAGE_END);
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -103,6 +154,26 @@ public class Menu extends JFrame {
         SwingUtilities.invokeLater(() -> {
             Menu window = new Menu();
             window.setVisible(true);
+        });
+    }
+}
+
+class SavesPanel extends JPanel {
+    public SavesPanel() {
+
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Saves");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            SavesPanel savesPanel = new SavesPanel();
+            frame.getContentPane().add(savesPanel);
+
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
         });
     }
 }
