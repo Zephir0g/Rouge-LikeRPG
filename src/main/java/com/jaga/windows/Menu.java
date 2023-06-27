@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -104,11 +105,17 @@ public class Menu extends JFrame {
         JPanel savesContentPanel = new JPanel();
         savesContentPanel.setLayout(new BoxLayout(savesContentPanel, BoxLayout.Y_AXIS));
 
-        // Add saves (example)
-        for (int i = 1; i <= 10; i++) {
-            JLabel saveLabel = new JLabel("Save " + i);
+
+
+        //Check Saves folder and print all saves
+        File savesFolder = new File("saves");
+        File[] saves = savesFolder.listFiles();
+        for (File save : saves) {
+            //TODO change this print to user friendly, add it`s like a button and load save
+            JLabel saveLabel = new JLabel(save.getName());
             savesContentPanel.add(saveLabel);
         }
+
 
         // Create vertical scroll bar
         JScrollPane scrollPane = new JScrollPane(savesContentPanel);
