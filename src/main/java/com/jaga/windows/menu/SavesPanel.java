@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Arrays;
 
 public class SavesPanel extends JPanel {
     private Menu menu;
@@ -39,11 +40,14 @@ public class SavesPanel extends JPanel {
     private void loadSaves() {
         File savesFolder = new File("saves");
         File[] saves = savesFolder.listFiles();
-        if (saves != null) {
+        if (saves.length > 0) {
             for (File save : saves) {
                 JLabel saveLabel = new JLabel(save.getName());
                 savesContentPanel.add(saveLabel);
             }
+        } else {
+            JLabel saveLabel = new JLabel("No saves");
+            savesContentPanel.add(saveLabel);
         }
     }
 }
