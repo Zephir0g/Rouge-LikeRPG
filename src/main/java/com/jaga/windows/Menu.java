@@ -1,5 +1,8 @@
 package com.jaga.windows;
 
+import com.jaga.game.GamePanel;
+import com.jaga.game.GameWindow;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -54,6 +57,18 @@ public class Menu extends JFrame {
         gbc.insets = new Insets(10, 0, 10, 0);
 
         JButton newGameButton = createButton("New Game");
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // close current window
+                dispose();
+
+                // create new game window
+                GameWindow gameWindow = new GameWindow();
+
+
+            }
+        });
         JButton continueButton = createButton("Continue");
         JButton savesButton = createButton("Saves");
         savesButton.addActionListener(new ActionListener() {
