@@ -19,8 +19,7 @@ public class Player extends Entity {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
-        Config.SCREEN_X = gamePanel.getWidth() / 2 - (Config.TILE_SIZE / 2);
-        Config.SCREEN_Y = gamePanel.getHeight() / 2 - (Config.TILE_SIZE / 2);
+
 
         getPlayerImage();
         direction = "down";

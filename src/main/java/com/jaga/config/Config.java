@@ -19,8 +19,8 @@ public class Config {
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COLUMN;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
 
-    public static int SCREEN_X = 0;
-    public static int SCREEN_Y = 0;
+    public static int SCREEN_X = 720;
+    public static int SCREEN_Y = 480;
 
 
     //PLAYER SETTINGS

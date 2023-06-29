@@ -17,6 +17,10 @@ public class GameWindow {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(true);
 
+        window.setSize(720, 480);
+        Config.SCREEN_X = window.getWidth() / 2 - (Config.TILE_SIZE / 2);
+        Config.SCREEN_Y = window.getHeight() / 2 - (Config.TILE_SIZE / 2);
+
         try{
             File savesFolder = new File("saves");
             if(!savesFolder.exists())
