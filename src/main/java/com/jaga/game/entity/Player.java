@@ -2,7 +2,9 @@ package com.jaga.game.entity;
 
 import com.jaga.config.Config;
 import com.jaga.game.GamePanel;
+import com.jaga.game.GameWindow;
 import com.jaga.game.keyListner.KeyHandler;
+import com.jaga.game.tile.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -41,23 +43,31 @@ public class Player extends Entity {
     }
 
     public void update() {
-
+        Tile[][] tileMap = GameWindow.getWorldStatic().getTileMap();
         if (keyHandler.up || keyHandler.down || keyHandler.left || keyHandler.right) {
             if (keyHandler.up) {
                 direction = "up";
-                Config.PLAYER_Y -= Config.PLAYER_SPEED;
+                if (Config.PLAYER_Y > 0) {
+                    Config.PLAYER_Y -= Config.PLAYER_SPEED;
+                }
             }
             if (keyHandler.down) {
                 direction = "down";
-                Config.PLAYER_Y += Config.PLAYER_SPEED;
+                if (Config.PLAYER_Y < (tileMap.length - 1) * Config.TILE_SIZE) {
+                    Config.PLAYER_Y += Config.PLAYER_SPEED;
+                }
             }
             if (keyHandler.left) {
                 direction = "left";
-                Config.PLAYER_X -= Config.PLAYER_SPEED;
+                if (Config.PLAYER_X > 0) {
+                    Config.PLAYER_X -= Config.PLAYER_SPEED;
+                }
             }
             if (keyHandler.right) {
                 direction = "right";
-                Config.PLAYER_X += Config.PLAYER_SPEED;
+                if (Config.PLAYER_X < (tileMap[0].length - 1) * Config.TILE_SIZE) {
+                    Config.PLAYER_X += Config.PLAYER_SPEED;
+                }
             }
 
             animation++;
@@ -112,7 +122,6 @@ public class Player extends Entity {
         g2.drawImage(image, (int) Config.SCREEN_X, (int) Config.SCREEN_Y, Config.TILE_SIZE, Config.TILE_SIZE, null);
 
     }
-
 
 
 }
