@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FilenameFilter;
+import java.util.Objects;
 
 public class SavesPanel extends JPanel {
     private Menu menu;
@@ -89,8 +91,17 @@ public class SavesPanel extends JPanel {
                             public void actionPerformed(ActionEvent e) {
                                 GameWindow gameWindow = new GameWindow();
                                 World world = gameWindow.getWorld();
-                                world.loadWorld(new File(save.getName()));
 
+                                FilenameFilter filter = new FilenameFilter() {
+                                    @Override
+                                    public boolean accept(File dir, String name) {
+                                        return name.endsWith(".map");
+                                    }
+                                };
+
+                                File worldFile = new File("saves/" + save.getName());
+                                //new File(Objects.requireNonNull(save.list(filter))[0])
+                                world.loadWorld(worldFile);
                                 gameWindow.init();
                             }
                         });

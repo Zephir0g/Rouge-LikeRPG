@@ -46,11 +46,10 @@ public class World {
 
     public void loadWorld(File saveWorldDirectory) {
         try {
-            FileReader fileReader = new FileReader("saves/world-2023-06-29-23-30-53/world.map");
             File saveWorldFile = new File(saveWorldDirectory, "world.map");
             LoadWorld loadWorld = new LoadWorld(gamePanel);
             tileMap = loadWorld.loadWorld(saveWorldFile);
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             System.err.println("The 'world.map' file could not be found.");
             e.printStackTrace();
             System.out.println("Shit happens :)");
