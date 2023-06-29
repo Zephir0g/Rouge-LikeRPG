@@ -1,7 +1,5 @@
 package com.jaga.config;
 
-import com.jaga.game.generation.World;
-
 public class Config {
 
     public static final String GAME_NAME = "DEFROZED";
@@ -13,10 +11,16 @@ public class Config {
     public static final int TILE_SCALE = 3;
     public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * TILE_SCALE; //48
 
-    public static final int MAX_SCREEN_COLUMN = 60;
-    public static final int MAX_SCREEN_ROW = 60;
-    public static final int SCREEN_WIDTH = 720;
-    public static final int SCREEN_HEIGHT = 480;
+    public static final int MAX_WORLD_COLUMN = 60;
+    public static final int MAX_WORLD_ROW = 60;
+
+    public static final int MAX_SCREEN_COLUMN = 16;
+    public static final int MAX_SCREEN_ROW = 12;
+    public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COLUMN;
+    public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
+
+    public static int SCREEN_X = 0;
+    public static int SCREEN_Y = 0;
 
 
     //PLAYER SETTINGS

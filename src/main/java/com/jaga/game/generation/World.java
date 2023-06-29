@@ -20,7 +20,7 @@ public class World {
 
     public World(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        tileMap = new Tile[Config.MAX_SCREEN_ROW][Config.MAX_SCREEN_COLUMN];
+        tileMap = new Tile[Config.MAX_WORLD_ROW][Config.MAX_WORLD_COLUMN];
         getTileImage();
     }
 

@@ -14,9 +14,14 @@ public class Player extends Entity {
     private GamePanel gamePanel;
     private KeyHandler keyHandler;
 
+
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
+
+        Config.SCREEN_X = gamePanel.getWidth() / 2 - (Config.TILE_SIZE / 2);
+        Config.SCREEN_Y = gamePanel.getHeight() / 2 - (Config.TILE_SIZE / 2);
+
         getPlayerImage();
         direction = "down";
     }
@@ -107,7 +112,7 @@ public class Player extends Entity {
             }
         }
 
-        g2.drawImage(image, (int) Config.PLAYER_X, (int) Config.PLAYER_Y, Config.TILE_SIZE, Config.TILE_SIZE, null);
+        g2.drawImage(image, (int) Config.SCREEN_X, (int) Config.SCREEN_Y, Config.TILE_SIZE, Config.TILE_SIZE, null);
 
     }
 }
