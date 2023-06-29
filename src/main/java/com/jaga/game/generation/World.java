@@ -7,9 +7,11 @@ import com.jaga.game.tile.Tile;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class World {
 
@@ -24,18 +26,15 @@ public class World {
         getTileImage();
     }
 
-
     private void getTileImage() {
         try {
             for (String tileName : Config.WORLD_MAP_TILE_NAME) {
                 Tile tile = new Tile();
-                tile.image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(Config.WORLD_MAP_TILE_PATH + tileName)));
+                tile.image = ImageIO.read(getClass().getResource(Config.WORLD_MAP_TILE_PATH + tileName));
                 tile.tileType = tileName.substring(0, tileName.indexOf("."));
-
                 tileList.add(tile);
-
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -45,24 +44,41 @@ public class World {
         worldGeneration.generateWorld();
     }
 
-    public void loadWorld(File saveWorldFile) {
-        LoadWorld loadWorld = new LoadWorld(gamePanel);
-//        tileMap = loadWorld.loadWorld(saveWorldFile);
+    public void loadWorld(File saveWorldDirectory) {
+        try {
+            FileReader fileReader = new FileReader("saves/world-2023-06-29-23-30-53/world.map");
+            File saveWorldFile = new File(saveWorldDirectory, "world.map");
+            LoadWorld loadWorld = new LoadWorld(gamePanel);
+            tileMap = loadWorld.loadWorld(saveWorldFile);
+        } catch (FileNotFoundException e) {
+            System.err.println("The 'world.map' file could not be found.");
+            e.printStackTrace();
+            System.out.println("Shit happens :)");
+        }
+
+
     }
+
 
     public void drawTile(Graphics2D g2) {
         int offsetX = getWorldOffsetX();
         int offsetY = getWorldOffsetY();
 
-        for (int row = 0; row < tileMap.length; row++) {
-            for (int col = 0; col < tileMap[row].length; col++) {
-                int tileIndex = getTileIndex(tileMap[row][col]);
-                int x = col * Config.TILE_SIZE + offsetX;
-                int y = row * Config.TILE_SIZE + offsetY;
-                g2.drawImage(tileList.get(tileIndex).image, x, y, Config.TILE_SIZE, Config.TILE_SIZE, null);
+        if (tileMap != null) {
+            for (int row = 0; row < tileMap.length; row++) {
+                for (int col = 0; col < tileMap[row].length; col++) {
+                    int tileIndex = getTileIndex(tileMap[row][col]);
+                    int x = col * Config.TILE_SIZE + offsetX;
+                    int y = row * Config.TILE_SIZE + offsetY;
+
+                    if (tileIndex >= 0 && tileIndex < tileList.size()) {
+                        g2.drawImage(tileList.get(tileIndex).image, x, y, Config.TILE_SIZE, Config.TILE_SIZE, null);
+                    }
+                }
             }
         }
     }
+
 
     protected int getTileIndex(Tile tile) {
         for (int i = 0; i < tileList.size(); i++) {
@@ -79,7 +95,6 @@ public class World {
     private int getWorldOffsetY() {
         return -(int) (Config.PLAYER_Y - Config.SCREEN_Y);
     }
-
 
     public Tile[][] getTileMap() {
         return tileMap;
@@ -100,7 +115,6 @@ public class World {
     public void addTile(Tile tile) {
         tileList.add(tile);
     }
-
 
     public String getWorldName() {
         return worldName;

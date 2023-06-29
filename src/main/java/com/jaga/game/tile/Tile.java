@@ -38,4 +38,8 @@ public class Tile {
                 ", tileType='" + tileType + '\'' +
                 ']';
     }
+
+    public void setTileType(String tileType) {
+        this.tileType = tileType;
+    }
 }
