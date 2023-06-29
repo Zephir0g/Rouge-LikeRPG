@@ -3,9 +3,9 @@ package com.jaga.game;
 import com.jaga.config.Config;
 import com.jaga.game.entity.FPSCounter;
 import com.jaga.game.entity.Player;
+import com.jaga.game.generation.World;
 import com.jaga.game.generation.WorldGeneration;
 import com.jaga.game.keyListner.KeyHandler;
-import com.jaga.game.tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,8 +15,8 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread gameThread;
     private FPSCounter fpsCounter;
     private KeyHandler keyHandler = new KeyHandler();
-    private TileManager tileManager = new TileManager(this);
     private WorldGeneration worldGeneration = new WorldGeneration(this);
+    private World world;
 
     private Player player = new Player(this, keyHandler);
 
@@ -32,6 +32,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void startGame() {
+        world = GameWindow.getWorldStatic();
+        System.out.println(world.toString());
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -73,17 +75,19 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
+        //tileManager.draw(g2);
+        world.drawTile(g2);
+
         // Draw FPS counter
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 16));
         g2.drawString("FPS: " + fpsCounter.getFPS(), 10, 20);
 
-        //tileManager.draw(g2);
-        worldGeneration.generateWorld();
-        worldGeneration.drawTile(g2);
-
         // Draw player
         player.draw(g2);
+
+
+        // Clear graphics
         g2.dispose();
     }
 }

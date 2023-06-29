@@ -1,12 +1,14 @@
 package com.jaga.windows.menu;
 
-import javax.swing.*;
+import com.jaga.game.GameWindow;
+import com.jaga.game.generation.LoadWorld;
+import com.jaga.game.generation.World;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Arrays;
 
 public class SavesPanel extends JPanel {
     private Menu menu;
@@ -42,6 +44,8 @@ public class SavesPanel extends JPanel {
         File[] saves = savesFolder.listFiles();
         if (saves.length > 0) {
             for (File save : saves) {
+                File worldFile = new File(save.getAbsolutePath() + "/world.map");
+
                 JButton saveButton = new JButton(save.getName());
                 saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                 saveButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
@@ -83,8 +87,12 @@ public class SavesPanel extends JPanel {
                         loadButton.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                // Perform "Load" action
-                                // Add your implementation here
+                                GameWindow gameWindow = new GameWindow();
+                                World world = gameWindow.getWorld();
+                                world.loadWorld(new File(save.getName()));
+//                                gameWindow.setWorld(world);
+
+                                gameWindow.init();
                             }
                         });
 

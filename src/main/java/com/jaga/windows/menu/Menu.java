@@ -1,6 +1,10 @@
 package com.jaga.windows.menu;
 
+import com.jaga.config.Config;
+import com.jaga.game.GamePanel;
 import com.jaga.game.GameWindow;
+import com.jaga.game.generation.World;
+import com.jaga.game.generation.WorldGeneration;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -67,6 +71,10 @@ public class Menu extends JFrame {
 
                 // create new game window
                 GameWindow gameWindow = new GameWindow();
+                World world = gameWindow.getWorld();
+                GamePanel gamePanel = gameWindow.getGamePanel();
+                world.generateWorld();
+                gameWindow.init();
 
 
             }

@@ -1,9 +1,10 @@
 package com.jaga.config;
 
+import com.jaga.game.generation.World;
+
 public class Config {
 
     public static final String GAME_NAME = "DEFROZED";
-
     //GAME SETTINGS
     public static final int MAX_FPS = 60;
 
