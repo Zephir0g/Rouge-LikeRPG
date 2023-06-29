@@ -4,6 +4,7 @@ import com.jaga.config.Config;
 import com.jaga.game.generation.World;
 
 import javax.swing.*;
+import java.io.File;
 
 public class GameWindow {
 
@@ -15,6 +16,16 @@ public class GameWindow {
         window = new JFrame(Config.GAME_NAME);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(true);
+
+        try{
+            File savesFolder = new File("saves");
+            if(!savesFolder.exists())
+                savesFolder.mkdirs();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         gamePanel = new GamePanel();
         world = new World(gamePanel);
     }

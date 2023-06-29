@@ -48,8 +48,6 @@ public class World {
     public void loadWorld(File saveWorldFile) {
         LoadWorld loadWorld = new LoadWorld(gamePanel);
 //        tileMap = loadWorld.loadWorld(saveWorldFile);
-
-        System.out.println(loadWorld.loadWorld(saveWorldFile));
     }
 
     public void drawTile(Graphics2D g2) {

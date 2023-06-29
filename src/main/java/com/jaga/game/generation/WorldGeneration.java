@@ -30,21 +30,6 @@ public class WorldGeneration {
         worldSaved = false;
     }
 
-    private void getTileImage() {
-        try {
-            ArrayList<Tile> tileList = world.getTileList();
-            for (String tileName : Config.WORLD_MAP_TILE_NAME) {
-                Tile tile = new Tile();
-                tile.image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(Config.WORLD_MAP_TILE_PATH + tileName)));
-                tile.tileType = tileName.substring(0, tileName.indexOf("."));
-
-            }
-            world.setTileList(tileList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void generateWorld() {
         //TODO create world generation algorithm
 
@@ -52,9 +37,7 @@ public class WorldGeneration {
         ArrayList<Tile> tileList = world.getTileList();
         if (!worldSaved) {
 
-            File savesFolder = new File("saves");
             File worldFolder = new File("saves/world-" + getCurrentDate());
-            savesFolder.mkdirs();
             worldFolder.mkdirs();
 
             world.setWorldName("saves/" + worldFolder.getName() + "/world.map");
