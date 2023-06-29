@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class World {
 
@@ -28,7 +29,7 @@ public class World {
         try {
             for (String tileName : Config.WORLD_MAP_TILE_NAME) {
                 Tile tile = new Tile();
-                tile.image = ImageIO.read(getClass().getResource(Config.WORLD_MAP_TILE_PATH + tileName));
+                tile.image = ImageIO.read(Objects.requireNonNull(getClass().getResource(Config.WORLD_MAP_TILE_PATH + tileName)));
                 tile.tileType = tileName.substring(0, tileName.indexOf("."));
                 tileList.add(tile);
             }
@@ -45,18 +46,21 @@ public class World {
     public void loadWorld(File saveWorldDirectory) {
         try {
             File saveWorldFile = new File(saveWorldDirectory, "world.map");
-            LoadWorld loadWorld = new LoadWorld();
-            tileMap = loadWorld.loadWorld(saveWorldFile);
+            LoadWorld loadWorld = new LoadWorld(gamePanel);
+            loadWorld.loadWorld(saveWorldFile);
+            printMatrix(tileMap);
         } catch (Exception e) {
             System.err.println("The 'world.map' file could not be found.");
             e.printStackTrace();
             System.out.println("Shit happens :)");
         }
-
-
     }
 
 
+    private void printMatrix(Tile[][] matrix){
+        //Print matrix
+        System.out.println(Arrays.deepToString(matrix));
+    }
     public void drawTile(Graphics2D g2) {
         int offsetX = getWorldOffsetX();
         int offsetY = getWorldOffsetY();

@@ -42,7 +42,6 @@ public class WorldGeneration {
             world.setWorldName("saves/" + worldFolder.getName() + "/world.map");
         }
 
-        System.out.println(Arrays.deepToString(world.getTileMap()));
         if (worldGenerated) {
             Random random = new Random();
 
@@ -58,10 +57,7 @@ public class WorldGeneration {
                     saveWorld(tileMap[row][col]);
                 }
             }
-            System.out.println(Arrays.deepToString(world.getTileMap()));
             world.setTileMap(tileMap);
-            System.out.println("-------------------");
-            System.out.println(Arrays.deepToString(world.getTileMap()));
             worldGenerated = false;
 //            printMatrix(tileMap);
         }
