@@ -7,8 +7,6 @@ import com.jaga.game.tile.Tile;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +45,7 @@ public class World {
     public void loadWorld(File saveWorldDirectory) {
         try {
             File saveWorldFile = new File(saveWorldDirectory, "world.map");
-            LoadWorld loadWorld = new LoadWorld(gamePanel);
+            LoadWorld loadWorld = new LoadWorld();
             tileMap = loadWorld.loadWorld(saveWorldFile);
         } catch (Exception e) {
             System.err.println("The 'world.map' file could not be found.");

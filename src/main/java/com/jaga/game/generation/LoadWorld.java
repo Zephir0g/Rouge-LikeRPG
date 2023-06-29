@@ -13,15 +13,9 @@ import java.util.List;
 public class LoadWorld {
 
     private World world;
-    private GamePanel gamePanel;
 
-    public LoadWorld(GamePanel gamePanel) {
-        try {
-            this.gamePanel = gamePanel;
-            //loadWorld(new File(world.getWorldName()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public LoadWorld() {
+
     }
 
     public Tile[][] loadWorld(File saveWorldFile) {
@@ -71,4 +65,5 @@ public class LoadWorld {
         }
         return null;
     }
+
 }

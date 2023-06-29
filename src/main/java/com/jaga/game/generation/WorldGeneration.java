@@ -1,19 +1,17 @@
 package com.jaga.game.generation;
 
-import com.jaga.config.Config;
 import com.jaga.game.GamePanel;
 import com.jaga.game.GameWindow;
 import com.jaga.game.tile.Tile;
 
-import javax.imageio.ImageIO;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Random;
 
 public class WorldGeneration {
@@ -32,19 +30,19 @@ public class WorldGeneration {
 
     public void generateWorld() {
         //TODO create world generation algorithm
-
         Tile[][] tileMap = world.getTileMap();
         ArrayList<Tile> tileList = world.getTileList();
-        if (!worldSaved) {
+        int tileMapRow = tileMap.length;
+        int tileMapColumn = tileMap[0].length;
 
+        if (!worldSaved) {
             File worldFolder = new File("saves/world-" + getCurrentDate());
             worldFolder.mkdirs();
 
             world.setWorldName("saves/" + worldFolder.getName() + "/world.map");
         }
 
-        int tileMapRow = tileMap.length;
-        int tileMapColumn = tileMap[0].length;
+        System.out.println(Arrays.deepToString(world.getTileMap()));
         if (worldGenerated) {
             Random random = new Random();
 
@@ -54,16 +52,28 @@ public class WorldGeneration {
                     Tile tile = tileList.get(tileIndex);
                     tile.setY(col);
                     tile.setX(row);
+                    tile.setTileType(tileList.get(tileIndex).getTileType());
                     tileMap[row][col] = tile;
 
                     saveWorld(tileMap[row][col]);
                 }
             }
+            System.out.println(Arrays.deepToString(world.getTileMap()));
             world.setTileMap(tileMap);
+            System.out.println("-------------------");
+            System.out.println(Arrays.deepToString(world.getTileMap()));
             worldGenerated = false;
+//            printMatrix(tileMap);
         }
         if (!isWorldSaved()) {
             setWorldSaved(true);
+        }
+    }
+
+    private void printMatrix(Tile[][] matrix) {
+        //TODO: Remove this method
+        for (int row = 0; row < matrix.length; row++) {
+            System.out.println(Arrays.toString(matrix[row]));
         }
     }
 
@@ -89,6 +99,10 @@ public class WorldGeneration {
 
     public boolean isWorldGenerated() {
         return worldGenerated;
+    }
+
+    public void setWorldGenerated(boolean worldGenerated) {
+        this.worldGenerated = worldGenerated;
     }
 
     public boolean isWorldSaved() {
