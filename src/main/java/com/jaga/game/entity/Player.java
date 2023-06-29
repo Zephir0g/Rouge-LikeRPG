@@ -19,8 +19,6 @@ public class Player extends Entity {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
-
-
         getPlayerImage();
         direction = "down";
     }
@@ -114,4 +112,7 @@ public class Player extends Entity {
         g2.drawImage(image, (int) Config.SCREEN_X, (int) Config.SCREEN_Y, Config.TILE_SIZE, Config.TILE_SIZE, null);
 
     }
+
+
+
 }

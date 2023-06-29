@@ -51,11 +51,14 @@ public class World {
     }
 
     public void drawTile(Graphics2D g2) {
+        int offsetX = getWorldOffsetX();
+        int offsetY = getWorldOffsetY();
+
         for (int row = 0; row < tileMap.length; row++) {
             for (int col = 0; col < tileMap[row].length; col++) {
                 int tileIndex = getTileIndex(tileMap[row][col]);
-                int x = col * Config.TILE_SIZE;
-                int y = row * Config.TILE_SIZE;
+                int x = col * Config.TILE_SIZE + offsetX;
+                int y = row * Config.TILE_SIZE + offsetY;
                 g2.drawImage(tileList.get(tileIndex).image, x, y, Config.TILE_SIZE, Config.TILE_SIZE, null);
             }
         }
@@ -67,6 +70,14 @@ public class World {
                 return i;
         }
         return -1; // Tile not found
+    }
+
+    private int getWorldOffsetX() {
+        return -(int) (Config.PLAYER_X - Config.SCREEN_X);
+    }
+
+    private int getWorldOffsetY() {
+        return -(int) (Config.PLAYER_Y - Config.SCREEN_Y);
     }
 
 
