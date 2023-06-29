@@ -45,7 +45,7 @@ public class LoadWorld {
 
             int maxColumn = 0;
 
-            // Находим максимальное значение столбца
+            // find max value of column
             for (Tile tile : tiles) {
                 int x = tile.getX();
                 if (x > maxColumn) {
@@ -54,11 +54,11 @@ public class LoadWorld {
             }
 
             int tileMapRow = tiles.size();
-            int tileMapColumn = maxColumn + 1; // Увеличиваем на 1, так как индексы начинаются с 0
+            int tileMapColumn = maxColumn + 1; // +1 because we start from 0
 
             Tile[][] tileMap = new Tile[tileMapRow][tileMapColumn];
 
-            // Заполняем tileMap
+            // Fill tileMap
             for (Tile tile : tiles) {
                 int x = tile.getX();
                 int y = tile.getY();
