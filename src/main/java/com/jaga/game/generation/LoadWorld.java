@@ -25,6 +25,7 @@ public class LoadWorld {
     public Tile[][] loadWorld(File saveWorldFile) {
         //TODO change this to load the world from a file
 
+
         try (BufferedReader reader = new BufferedReader(new FileReader(saveWorldFile))) {
             Tile[][] tileMap = world.getTileMap();
 
@@ -47,7 +48,7 @@ public class LoadWorld {
             return tileMap;
         } catch (IOException e) {
             e.printStackTrace();
-        }
+         }
         return null;
     }
 

@@ -33,7 +33,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void startGame() {
         world = GameWindow.getWorldStatic();
-        System.out.println(world.toString());
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -75,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        //tileManager.draw(g2);
+        //World draw
         world.drawTile(g2);
 
         // Draw FPS counter

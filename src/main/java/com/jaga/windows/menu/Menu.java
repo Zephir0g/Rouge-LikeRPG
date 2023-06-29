@@ -72,7 +72,6 @@ public class Menu extends JFrame {
                 // create new game window
                 GameWindow gameWindow = new GameWindow();
                 World world = gameWindow.getWorld();
-                GamePanel gamePanel = gameWindow.getGamePanel();
                 world.generateWorld();
                 gameWindow.init();
 

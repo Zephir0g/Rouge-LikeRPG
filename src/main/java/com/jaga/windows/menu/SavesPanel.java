@@ -90,7 +90,6 @@ public class SavesPanel extends JPanel {
                                 GameWindow gameWindow = new GameWindow();
                                 World world = gameWindow.getWorld();
                                 world.loadWorld(new File(save.getName()));
-//                                gameWindow.setWorld(world);
 
                                 gameWindow.init();
                             }
