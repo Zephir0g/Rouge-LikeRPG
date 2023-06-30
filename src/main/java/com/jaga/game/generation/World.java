@@ -101,8 +101,7 @@ public class World {
 
     protected int getTileIndex(Tile tile) {
         for (int i = 0; i < tileList.size(); i++) {
-            if (tileList.get(i) == tile)
-                System.out.println("Tile: " + tileList.get(i).toString() + " Index: " + i);
+            if (Objects.equals(tileList.get(i).getTileType(), tile.getTileType()))
                 return i;
         }
         return -1; // Tile not found
