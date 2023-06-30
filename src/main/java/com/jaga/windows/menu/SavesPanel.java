@@ -3,6 +3,7 @@ package com.jaga.windows.menu;
 import com.jaga.game.GameWindow;
 import com.jaga.game.generation.LoadWorld;
 import com.jaga.game.generation.World;
+import org.apache.commons.io.FileUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.Objects;
 
 public class SavesPanel extends JPanel {
@@ -46,7 +48,7 @@ public class SavesPanel extends JPanel {
         File[] saves = savesFolder.listFiles();
         if (saves.length > 0) {
             for (File save : saves) {
-                File worldFile = new File(save.getAbsolutePath() + "/world.map");
+                File worldFile = new File("saves/" + save.getName());
 
                 JButton saveButton = new JButton(save.getName());
                 saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -92,15 +94,6 @@ public class SavesPanel extends JPanel {
                                 GameWindow gameWindow = new GameWindow();
                                 World world = gameWindow.getWorld();
 
-                                FilenameFilter filter = new FilenameFilter() {
-                                    @Override
-                                    public boolean accept(File dir, String name) {
-                                        return name.endsWith(".map");
-                                    }
-                                };
-
-                                File worldFile = new File("saves/" + save.getName());
-                                //new File(Objects.requireNonNull(save.list(filter))[0])
                                 world.loadWorld(worldFile);
                                 gameWindow.init();
                             }
@@ -109,8 +102,26 @@ public class SavesPanel extends JPanel {
                         deleteButton.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                // Perform "Delete" action
-                                // Add your implementation here
+                                //Delete the save
+                                File worldFile = new File("saves/" + save.getName());
+                                try {
+                                    FileUtils.deleteDirectory(worldFile);
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+
+
+                                // Re-enable the "Save" button
+                                saveButton.setEnabled(true);
+
+                                // Remove the new buttons panel
+                                savesContentPanel.remove(newButtonsPanel);
+
+                                // Repaint the panel to update the UI
+                                savesContentPanel.revalidate();
+                                savesContentPanel.repaint();
+                                loadSaves();
+
                             }
                         });
 
@@ -164,5 +175,6 @@ public class SavesPanel extends JPanel {
             savesContentPanel.add(saveLabel);
         }
     }
+
 
 }
