@@ -35,7 +35,6 @@ public class World {
                 tile.tileType = tileName.substring(0, tileName.indexOf("."));
                 tileList.add(tile);
             }
-            System.out.println("TileList: " + tileList.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,12 +75,6 @@ public class World {
         int offsetX = getWorldOffsetX();
         int offsetY = getWorldOffsetY();
         tileMap = getTileMap();
-        if (tmp) {
-            System.out.println("----------------" + "\nDraw:");
-//            printMatrix(tileMap);
-            tmp = false;
-        }
-
 
         if (tileMap != null) {
             for (int row = 0; row < tileMap.length; row++) {

@@ -11,8 +11,8 @@ public class Config {
     public static final int TILE_SCALE = 3;
     public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * TILE_SCALE; //48
 
-    public static final int MAX_WORLD_COLUMN = 16;
-    public static final int MAX_WORLD_ROW = 12;
+    public static final int MAX_WORLD_COLUMN = 60;
+    public static final int MAX_WORLD_ROW = 60;
 
     public static final int MAX_SCREEN_COLUMN = 16;
     public static final int MAX_SCREEN_ROW = 12;
