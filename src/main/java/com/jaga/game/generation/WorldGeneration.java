@@ -68,8 +68,12 @@ public class WorldGeneration {
 
     private void printMatrix(Tile[][] matrix) {
         //TODO: Remove this method
+
+        //print mateix use for
         for (int row = 0; row < matrix.length; row++) {
-            System.out.println(Arrays.toString(matrix[row]));
+            for (int col = 0; col < matrix[0].length; col++)
+                System.out.print(matrix[row][col] + " ");
+            System.out.println();
         }
     }
 

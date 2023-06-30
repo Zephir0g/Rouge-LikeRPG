@@ -14,14 +14,16 @@ import java.util.Objects;
 
 public class World {
 
-    private Tile[][] tileMap;
+    private Tile[][] tileMap = new Tile[Config.MAX_WORLD_ROW][Config.MAX_WORLD_COLUMN];
+    ;
     private ArrayList<Tile> tileList = new ArrayList<>();
     private String worldName;
     private GamePanel gamePanel;
 
+    private boolean tmp = true;
+
     public World(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        tileMap = new Tile[Config.MAX_WORLD_ROW][Config.MAX_WORLD_COLUMN];
         getTileImage();
     }
 
@@ -33,6 +35,7 @@ public class World {
                 tile.tileType = tileName.substring(0, tileName.indexOf("."));
                 tileList.add(tile);
             }
+            System.out.println("TileList: " + tileList.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,7 +51,7 @@ public class World {
             File saveWorldFile = new File(saveWorldDirectory, "world.map");
             LoadWorld loadWorld = new LoadWorld(gamePanel);
             loadWorld.loadWorld(saveWorldFile);
-            printMatrix(tileMap);
+//            printMatrix(tileMap);
         } catch (Exception e) {
             System.err.println("The 'world.map' file could not be found.");
             e.printStackTrace();
@@ -57,13 +60,28 @@ public class World {
     }
 
 
-    private void printMatrix(Tile[][] matrix){
+    private void printMatrix(Tile[][] matrix) {
         //Print matrix
         System.out.println(Arrays.deepToString(matrix));
+
+        //print matrix use for
+       /* for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[0].length; col++)
+                System.out.print(matrix[row][col] + " ");
+            System.out.println();
+        }*/
     }
+
     public void drawTile(Graphics2D g2) {
         int offsetX = getWorldOffsetX();
         int offsetY = getWorldOffsetY();
+        tileMap = getTileMap();
+        if (tmp) {
+            System.out.println("----------------" + "\nDraw:");
+//            printMatrix(tileMap);
+            tmp = false;
+        }
+
 
         if (tileMap != null) {
             for (int row = 0; row < tileMap.length; row++) {
@@ -84,6 +102,7 @@ public class World {
     protected int getTileIndex(Tile tile) {
         for (int i = 0; i < tileList.size(); i++) {
             if (tileList.get(i) == tile)
+                System.out.println("Tile: " + tileList.get(i).toString() + " Index: " + i);
                 return i;
         }
         return -1; // Tile not found

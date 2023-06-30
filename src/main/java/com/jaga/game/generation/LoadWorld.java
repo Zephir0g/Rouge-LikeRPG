@@ -8,7 +8,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LoadWorld {
@@ -24,51 +26,46 @@ public class LoadWorld {
 
     public void loadWorld(File saveWorldFile) {
         System.out.println("Loading world..");
-        try (BufferedReader reader = new BufferedReader(new FileReader(saveWorldFile))) {
-            List<Tile> tiles = new ArrayList<>();
-            String line;
+        Tile[][] tileMap = world.getTileMap();
+        ArrayList<Tile> tiles = new ArrayList<>();
+        ArrayList<String> tileList = new ArrayList<>();
 
-            while ((line = reader.readLine()) != null) {
-                String[] properties = line.split(", ");
-                int x = Integer.parseInt(properties[0].substring(properties[0].indexOf('=') + 1));
-                int y = Integer.parseInt(properties[1].substring(properties[1].indexOf('=') + 1));
-                // I have tileType='grass' and I want to get only grass
-                String tileType = properties[2].substring(properties[2].indexOf('=') + 2, properties[2].length() - 2);
-//                System.out.println( tileType);
+        if (!saveWorldFile.exists()) {
+            System.err.println("The save file does not exist.");
+            return;
+        }
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(saveWorldFile))){
+
+            while (reader.ready()){
+
+                //Write to String[] properties  split(", ") and replace "[" with " " and "]" with " "
+                String[] properties = reader.readLine().replace("[", "").replace("]", "").split(", ");
+
+
+                HashMap<String, String> tileProperties = new HashMap<>();
+                for (String property : properties) {
+                    String[] keyValue = property.split("=");
+                    tileProperties.put(keyValue[0], keyValue[1].replace("'", ""));
+                }
 
                 Tile tile = new Tile();
-                tile.setX(x);
-                tile.setY(y);
-                tile.setTileType(tileType);
+                tile.setX(Integer.parseInt(tileProperties.get("x")));
+                tile.setY(Integer.parseInt(tileProperties.get("y")));
+                tile.setTileType(tileProperties.get("tileType"));
+
+
 
                 tiles.add(tile);
             }
 
-            int maxColumn = 0;
-
-            // find max value of column
-            for (Tile tile : tiles) {
-                int x = tile.getY();
-                if (x > maxColumn) {
-                    maxColumn = x;
-                }
-            }
-
-            int tileMapRow = tiles.size();
-            int tileMapColumn = maxColumn + 1; // +1 because we start from 0
-
-            Tile[][] tileMap = new Tile[tileMapRow][tileMapColumn];
-
-            // Fill tileMap
-            for (Tile tile : tiles) {
-                int x = tile.getX();
-                int y = tile.getY();
-                tileMap[x][y] = tile;
+            for(Tile tile : tiles){
+                tileMap[tile.getX()][tile.getY()] = tile;
             }
 
             world.setTileMap(tileMap);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e){
+            e.getStackTrace();
         }
     }
 
